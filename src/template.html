@@ -195,7 +195,17 @@ td.num{text-align:right;font-variant-numeric:tabular-nums;white-space:nowrap;col
 .g-toc{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:8px}
 .g-toc a{font-size:13.5px;font-weight:500;color:var(--ink);text-decoration:none;border:1px solid var(--hair);border-radius:999px;padding:6px 14px;transition:border-color 160ms var(--ease)}
 .g-toc a:hover{border-color:var(--ink)}
-.g-sec{scroll-margin-top:16px;padding-top:24px}
+.g-sec{scroll-margin-top:64px;padding-top:24px}
+.refs{margin-top:6px;padding-top:12px;border-top:1px solid var(--hair-soft)}
+.refs-h{display:block;font-size:12.5px;font-weight:700;color:var(--muted);margin-bottom:6px}
+.refs ul{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:2px}
+.refs a{display:flex;align-items:baseline;justify-content:space-between;gap:10px;padding:7px 10px;margin:0 -10px;border-radius:8px;text-decoration:none;color:var(--ink);transition:background-color 140ms var(--ease)}
+.refs a:hover{background:var(--soft)}
+.refs-t{font-size:14px;font-weight:600;line-height:1.4;min-width:0}
+.refs-d{flex:none;font-size:12px;color:var(--muted);white-space:nowrap}
+.refs-add{display:inline-flex;align-items:center;gap:6px;align-self:flex-start;margin-top:4px;padding:6px 10px;border:1px dashed var(--hair);border-radius:8px;background:none;color:var(--muted);font:inherit;font-size:13px;font-weight:600;cursor:pointer}
+.refs-add:hover{border-color:var(--ink);color:var(--ink)}
+@media (max-width:760px){.refs-d{display:none}}
 .g-head{margin:0 0 14px;font-family:var(--f-display);font-weight:700;font-size:22px;color:var(--ink);letter-spacing:-.3px}
 .src-유튜브{color:#fff;background:#c4302b}.src-인스타그램{color:#fff;background:#a33a9c}.src-블로그{color:var(--pine);background:var(--pine-soft)}.src-커뮤니티{color:var(--ink);background:var(--soft)}
 
@@ -275,7 +285,9 @@ button.pill:active,button.city-dot:active{transform:scale(.95)}
 .ctl{margin-left:auto;display:inline-flex;align-items:center;gap:0;opacity:0;transition:opacity 160ms var(--ease)}
 .card:hover .ctl,.card:focus-within .ctl,tr:hover .ctl,tr:focus-within .ctl,.quest:hover .ctl,.quest:focus-within .ctl{opacity:1}
 @media (hover:none){.ctl{opacity:1}}
-.meta-end{justify-content:flex-end;min-height:0}
+.card{position:relative}
+.meta-end{position:absolute;top:10px;right:10px;justify-content:flex-end;min-height:0;z-index:1}
+.meta-end .ctl{background:#fff;border-radius:10px}
 .ic{width:32px;height:32px;border:0;background:none;border-radius:8px;display:inline-grid;place-items:center;color:#8a8a8a;cursor:pointer;padding:0;flex:none;transition:background-color 140ms var(--ease),color 140ms var(--ease)}
 .ic:hover{background:var(--soft);color:var(--ink)}
 .ic:active{transform:scale(.94)}
@@ -406,7 +418,7 @@ var SCHEMA={
   places:[{k:"name",l:"이름",t:"text"},{k:"city",l:"도시",t:"select",o:SEL_CITY},{k:"kind",l:"종류",t:"select",o:["관광","식당","맥주","카페","온천","체험","교통"]},{k:"verdict",l:"판정",t:"select",o:["필수","추천","선택","기념일","패스"]},{k:"note",l:"메모",t:"textarea"},{k:"url",l:"링크",t:"url"}],
   tours:[{k:"name",l:"업체·상품",t:"text"},{k:"cat",l:"분류",t:"select",o:["한국 플랫폼","한인 투어사","글로벌 플랫폼","현지 업체","허니문 패키지"]},{k:"pick",l:"판정",t:"select",o:["1순위","대안","참고","비추천"]},{k:"city",l:"도시",t:"select",o:SEL_CITY},{k:"leg",l:"구간·용도",t:"text"},{k:"price",l:"가격",t:"text"},{k:"drop",l:"할슈타트 하차",t:"text"},{k:"ko",l:"한국어",t:"text"},{k:"rating",l:"평점·후기",t:"text"},{k:"cancel",l:"취소 규정",t:"text"},{k:"note",l:"메모",t:"textarea"},{k:"url",l:"링크",t:"url"}],
   tips:[{k:"src",l:"출처 종류",t:"select",o:["유튜브","인스타그램","블로그","커뮤니티"]},{k:"city",l:"도시",t:"select",o:SEL_CITY},{k:"title",l:"제목",t:"text"},{k:"body",l:"내용",t:"textarea"},{k:"url",l:"링크",t:"url"}],
-  guide:[{k:"cat",l:"분류",t:"select",o:GUIDE_CATS},{k:"title",l:"제목",t:"text"},{k:"body",l:"내용",t:"textarea"},{k:"url",l:"근거 링크",t:"url"}],
+  guide:[{k:"cat",l:"분류",t:"select",o:GUIDE_CATS},{k:"title",l:"제목",t:"text"},{k:"body",l:"내용",t:"textarea"},{k:"links",l:"참고한 사이트 (한 줄에 하나씩, 이름 | 주소)",t:"links"}],
   fixes:[{k:"sev",l:"구분",t:"select",o:["수정","보완","확인"]},{k:"title",l:"제목",t:"text"},{k:"body",l:"내용",t:"textarea"},{k:"url",l:"근거 링크",t:"url"}],
   budget:[{k:"name",l:"항목",t:"text"},{k:"cat",l:"분류",t:"select",o:["항공","숙소","교통","투어·입장","식사","기타"]},{k:"status",l:"상태",t:"select",o:["결제완료","예상"]},{k:"krw",l:"금액(원)",t:"number"},{k:"note",l:"메모",t:"text"}]
 };
@@ -529,6 +541,16 @@ function ctl(col,id,noGrip){
 }
 function addCard(col,label,extra){return locked?"":'<button type="button" class="add-card" data-act="add" data-col="'+col+'"'+(extra||"")+'>'+IC.plus+label+'</button>'}
 function link(u,t){u=safeUrl(u);return u?'<a class="src-link" href="'+esc(u)+'" target="_blank" rel="noopener">'+esc(t||"링크 열기")+'</a>':""}
+// 참고한 사이트 목록 (여행 준비 A–Z)
+function host(u){try{return new URL(u).hostname.replace(/^www\./,"")}catch(e){return ""}}
+function refs(g){
+  var ls=(g.links||[]).filter(function(a){return safeUrl(a.u)});
+  if(g.url&&safeUrl(g.url)&&!ls.some(function(a){return a.u===g.url}))ls.unshift({t:"근거 자료",u:g.url});
+  if(!ls.length)return locked?"":'<button type="button" class="refs-add" data-act="open" data-col="guide" data-id="'+esc(g.id)+'">'+IC.plus+'참고 사이트 추가</button>';
+  var h='<div class="refs"><span class="refs-h">참고한 사이트 '+ls.length+'</span><ul>';
+  ls.forEach(function(a){h+='<li><a href="'+esc(a.u)+'" target="_blank" rel="noopener"><span class="refs-t">'+esc(a.t||host(a.u))+'</span><span class="refs-d">'+esc(host(a.u))+' ↗</span></a></li>'});
+  return h+'</ul></div>';
+}
 function empty(msg){return '<div class="empty"><b>찾는 항목이 없어요</b>'+esc(msg||"검색어나 도시 거르기를 바꿔 보세요.")+'</div>'}
 function top(desc,btn){return '<div class="panel-top"><p>'+desc+'</p>'+(btn||"")+'</div>'}
 function swUnder(done){return '<div class="sw-under" aria-hidden="true"><span class="sw-done">'+(done?"되돌리기":"완료")+'</span><button type="button" class="sw-del" data-act="swdel" tabindex="-1">삭제</button></div>'}
@@ -639,7 +661,7 @@ function renderTab(){
     cats.forEach(function(c,i){
       hg+='<section class="g-sec" id="g-'+i+'"><h2 class="g-head">'+esc(c)+'</h2><div class="grid" data-sort="guide">';
       L.filter(function(g){return g.cat===c}).forEach(function(g){
-        hg+='<article class="card" data-key="'+esc(g.id)+'"><div class="meta meta-end">'+ctl("guide",g.id)+'</div>'+ed("guide",g.id,"title",g.title,{tag:"h3",ph:"제목"})+ed("guide",g.id,"body",g.body,{tag:"p",multi:true,ph:"내용"})+link(g.url,"근거 보기")+'</article>';
+        hg+='<article class="card" data-key="'+esc(g.id)+'"><div class="meta meta-end">'+ctl("guide",g.id)+'</div>'+ed("guide",g.id,"title",g.title,{tag:"h3",ph:"제목"})+ed("guide",g.id,"body",g.body,{tag:"p",multi:true,ph:"내용"})+refs(g)+'</article>';
       });
       hg+=addCard("guide","항목 추가",' data-cat="'+esc(c)+'"')+'</div></section>';
     });
@@ -773,6 +795,7 @@ function openForm(col,id){
     if(s.t==="select"){f+='<select id="'+nm+'" name="'+s.k+'">';s.o.forEach(function(x){f+='<option'+(v===x?" selected":"")+'>'+esc(x)+'</option>'});f+='</select>'}
     else if(s.t==="textarea")f+='<textarea id="'+nm+'" name="'+s.k+'">'+esc(v)+'</textarea>';
     else if(s.t==="lines")f+='<textarea class="lines" id="'+nm+'" name="'+s.k+'">'+esc((v||[]).map(function(it){return it[0]+" | "+it[1]}).join("\n"))+'</textarea>';
+    else if(s.t==="links")f+='<textarea class="lines" id="'+nm+'" name="'+s.k+'" placeholder="예) 프라하 교통 공식 | https://pid.cz/en/">'+esc((v||[]).map(function(a){return a.t+" | "+a.u}).join("\n"))+'</textarea>';
     else f+='<input id="'+nm+'" name="'+s.k+'" type="'+(s.t==="number"?"number":s.t==="date"?"date":s.t==="url"?"url":"text")+'" value="'+esc(v)+'">';
     f+='</label>';
   });
@@ -784,6 +807,7 @@ function openForm(col,id){
     var fd=new FormData(e.target);var n=id?clone(o):{id:uid()};
     SCHEMA[col].forEach(function(s){
       var v=fd.get(s.k)||"";
+      if(s.t==="links"){n[s.k]=String(v).split("\n").map(function(l){return l.trim()}).filter(Boolean).map(function(l){var k=l.lastIndexOf("|");var u=(k<0?l:l.slice(k+1)).trim(),tt=k<0?"":l.slice(0,k).trim();if(!/^https?:\/\//i.test(u))u="https://"+u.replace(/^\/+/,"");return {t:tt||u.replace(/^https?:\/\/(www\.)?/,"").split("/")[0],u:u}});return}
       if(s.t==="lines"){var old=(o.items||[]);n[s.k]=String(v).split("\n").map(function(l){return l.trim()}).filter(Boolean).map(function(l,i){var k=l.indexOf("|");var tm=k<0?"":l.slice(0,k).trim(),tx=k<0?l:l.slice(k+1).trim();return [tm,tx,(old[i]&&old[i][2])||uid()]})}
       else if(s.t==="number")n[s.k]=+v||0;
       else n[s.k]=String(v).trim();
