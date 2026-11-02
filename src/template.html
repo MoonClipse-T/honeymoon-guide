@@ -192,6 +192,11 @@ td.num{text-align:right;font-variant-numeric:tabular-nums;white-space:nowrap;col
 /* 점검·꿀팁 */
 .sev-수정{color:#fff;background:var(--red)}.sev-보완{color:var(--gold);background:var(--gold-soft)}.sev-확인{color:var(--pine);background:var(--pine-soft)}
 .fix-body{white-space:pre-line}
+.g-toc{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:8px}
+.g-toc a{font-size:13.5px;font-weight:500;color:var(--ink);text-decoration:none;border:1px solid var(--hair);border-radius:999px;padding:6px 14px;transition:border-color 160ms var(--ease)}
+.g-toc a:hover{border-color:var(--ink)}
+.g-sec{scroll-margin-top:16px;padding-top:24px}
+.g-head{margin:0 0 14px;font-family:var(--f-display);font-weight:700;font-size:22px;color:var(--ink);letter-spacing:-.3px}
 .src-유튜브{color:#fff;background:#c4302b}.src-인스타그램{color:#fff;background:#a33a9c}.src-블로그{color:var(--pine);background:var(--pine-soft)}.src-커뮤니티{color:var(--ink);background:var(--soft)}
 
 .empty{text-align:center;padding:48px 10px;color:var(--muted)}
@@ -258,22 +263,24 @@ var CCOL={"프라하":"#d93a62","드레스덴":"#8a63d2","체스키크룸로프"
 var NODES=[
   {city:"프라하",label:"프라하",date:"12.12–14",fx:.08},
   {city:"드레스덴",label:"드레스덴",date:"12.14 당일",fx:.235},
-  {city:"체스키크룸로프",label:"체스키",date:"12.15 오전",fx:.39},
+  {city:"체스키크룸로프",label:"체스키",date:"12.15 점심",fx:.39},
   {city:"할슈타트",label:"할슈타트",date:"12.15 1박",fx:.55},
-  {city:"빈",label:"빈",date:"12.16 경유",fx:.72},
+  {city:"빈",label:"빈",date:"선택",fx:.72},
   {city:"부다페스트",label:"부다페스트",date:"12.16–19",fx:.9}
 ];
 var TABS=[
-  {k:"days",l:"일정"},{k:"quests",l:"예약 퀘스트"},{k:"places",l:"장소·맛집"},{k:"tours",l:"투어·여행사"},
+  {k:"days",l:"일정"},{k:"guide",l:"여행 준비 A–Z"},{k:"quests",l:"예약 퀘스트"},{k:"places",l:"장소·맛집"},{k:"tours",l:"투어·여행사"},
   {k:"tips",l:"현지 꿀팁"},{k:"fixes",l:"보고서 점검"},{k:"budget",l:"예산"}
 ];
 var SEL_CITY=CITIES.concat(["공통"]);
+var GUIDE_CATS=["출국 전","돈·카드","통신·앱","교통: 프라하","교통: 기차","교통: 할슈타트","교통: 부다페스트","날씨·옷","식당·팁","안전","현지에서 하루","현지어","귀국"];
 var SCHEMA={
   days:[{k:"date",l:"날짜",t:"date"},{k:"city",l:"도시",t:"select",o:SEL_CITY},{k:"title",l:"제목",t:"text"},{k:"stay",l:"숙소",t:"text"},{k:"alert",l:"주의 메모",t:"text"},{k:"items",l:"시간표 (한 줄에 하나씩, 시각 | 내용)",t:"lines"}],
   quests:[{k:"text",l:"할 일",t:"text"},{k:"due",l:"마감일",t:"date"},{k:"prio",l:"중요도",t:"select",o:["긴급","보통","선택"]},{k:"note",l:"메모",t:"textarea"},{k:"url",l:"링크",t:"url"}],
   places:[{k:"name",l:"이름",t:"text"},{k:"city",l:"도시",t:"select",o:SEL_CITY},{k:"kind",l:"종류",t:"select",o:["관광","식당","맥주","카페","온천","체험","교통"]},{k:"verdict",l:"판정",t:"select",o:["필수","추천","선택","기념일","패스"]},{k:"note",l:"메모",t:"textarea"},{k:"url",l:"링크",t:"url"}],
   tours:[{k:"name",l:"업체·상품",t:"text"},{k:"cat",l:"분류",t:"select",o:["한국 플랫폼","한인 투어사","글로벌 플랫폼","현지 업체","허니문 패키지"]},{k:"pick",l:"판정",t:"select",o:["1순위","대안","참고","비추천"]},{k:"city",l:"도시",t:"select",o:SEL_CITY},{k:"leg",l:"구간·용도",t:"text"},{k:"price",l:"가격",t:"text"},{k:"drop",l:"할슈타트 하차",t:"text"},{k:"ko",l:"한국어",t:"text"},{k:"rating",l:"평점·후기",t:"text"},{k:"cancel",l:"취소 규정",t:"text"},{k:"note",l:"메모",t:"textarea"},{k:"url",l:"링크",t:"url"}],
   tips:[{k:"src",l:"출처 종류",t:"select",o:["유튜브","인스타그램","블로그","커뮤니티"]},{k:"city",l:"도시",t:"select",o:SEL_CITY},{k:"title",l:"제목",t:"text"},{k:"body",l:"내용",t:"textarea"},{k:"url",l:"링크",t:"url"}],
+  guide:[{k:"cat",l:"분류",t:"select",o:GUIDE_CATS},{k:"title",l:"제목",t:"text"},{k:"body",l:"내용",t:"textarea"},{k:"url",l:"근거 링크",t:"url"}],
   fixes:[{k:"sev",l:"구분",t:"select",o:["수정","보완","확인"]},{k:"title",l:"제목",t:"text"},{k:"body",l:"내용",t:"textarea"},{k:"url",l:"근거 링크",t:"url"}],
   budget:[{k:"name",l:"항목",t:"text"},{k:"cat",l:"분류",t:"select",o:["항공","숙소","교통","투어·입장","식사","기타"]},{k:"status",l:"상태",t:"select",o:["결제완료","예상"]},{k:"krw",l:"금액(원)",t:"number"},{k:"note",l:"메모",t:"text"}]
 };
@@ -306,7 +313,7 @@ function uid(){return Math.random().toString(36).slice(2,9)}
 function hay(o){return JSON.stringify(o).toLowerCase()}
 function match(o){
   if(q&&hay(o).indexOf(q)<0)return false;
-  if(city&&(tab!=="budget"&&tab!=="fixes"&&tab!=="quests")){var c=o.city||"";if(c!==city&&hay(o).indexOf(city.toLowerCase())<0)return false}
+  if(city&&(tab!=="budget"&&tab!=="fixes"&&tab!=="quests"&&tab!=="guide")){var c=o.city||"";if(c!==city&&hay(o).indexOf(city.toLowerCase())<0)return false}
   return true;
 }
 function countFor(k){var list=S[k]||[];var saved=tab;tab=k;var n=list.filter(match).length;tab=saved;return n}
@@ -472,6 +479,21 @@ function renderTab(){
       h5+=link(t.url,"원문 보기")+editBtns("tips",t.id)+'</article>';
     });
     return h5+'</div>';
+  }
+  if(tab==="guide"){
+    var hg=top("처음 가는 동유럽 겨울 여행에서 준비할 것과 현지에서 움직이는 법을 순서대로 모았어요. 요금은 2026년 기준이라 출발 전에 앱에서 한 번 더 확인하세요.",addBtn("guide","항목 추가"));
+    if(!L.length)return hg+empty();
+    var cats=GUIDE_CATS.filter(function(c){return L.some(function(g){return g.cat===c})});
+    L.forEach(function(g){if(cats.indexOf(g.cat)<0)cats.push(g.cat)});
+    hg+='<nav class="g-toc" aria-label="분류">';cats.forEach(function(c,i){hg+='<a href="#g-'+i+'">'+esc(c)+'</a>'});hg+='</nav>';
+    cats.forEach(function(c,i){
+      hg+='<section class="g-sec" id="g-'+i+'"><h2 class="g-head">'+esc(c)+'</h2><div class="grid">';
+      L.filter(function(g){return g.cat===c}).forEach(function(g){
+        hg+='<article class="card"><h3>'+esc(g.title)+'</h3><p class="fix-body">'+esc(g.body)+'</p>'+link(g.url,"근거 보기")+editBtns("guide",g.id)+'</article>';
+      });
+      hg+='</div></section>';
+    });
+    return hg;
   }
   if(tab==="fixes"){
     var h6=top("기존 보고서와 노션 자료를 맞대어 보고 고칠 곳, 더할 곳, 다시 확인할 곳을 골랐어요.",addBtn("fixes","점검 항목 추가"));
