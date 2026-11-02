@@ -1,0 +1,626 @@
+<title>12월 신혼여행 가이드</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Gowun+Batang:wght@700&family=Noto+Sans+KR:wght@400;500;600;700&display=swap">
+<style id="gs">
+/* Layout: 사진이 주인공인 여행 마켓플레이스 결 — 전면 크리스마스 사진 히어로, 그 위로 걸친 알약 검색창, 도시 사진 원형 필터, 흰 바탕의 헤어라인 카드. 강조색은 크리스마스 레드 하나 */
+:root{
+  --canvas:#ffffff; --soft:#f7f7f7; --strong:#f0efed; --ink:#222222; --body:#3f3f3f; --muted:#6a6a6a;
+  --hair:#dddddd; --hair-soft:#ebebeb; --red:#d42a3c; --red-d:#b01e2f; --red-soft:#fde8ea;
+  --pine:#1f6b4a; --pine-soft:#e3f1ea; --gold:#b98a2e; --gold-soft:#fbf1dc; --night:#0e1426;
+  --f-display:"Gowun Batang","Noto Serif KR",Georgia,serif;
+  --f-body:"Noto Sans KR",system-ui,-apple-system,"Apple SD Gothic Neo","Malgun Gothic",sans-serif;
+  --r-sm:8px; --r-md:14px; --r-xl:32px;
+  --lift:0 0 0 1px rgba(0,0,0,.02),0 2px 6px rgba(0,0,0,.04),0 4px 8px rgba(0,0,0,.1);
+  --ease:cubic-bezier(0.23,1,0.32,1);
+  color-scheme:light;
+}
+html{background:var(--night)}
+body{background:var(--canvas);color:var(--body);font-family:var(--f-body);font-size:15px;line-height:1.6;min-height:100%;-webkit-font-smoothing:antialiased;word-break:keep-all;overflow-wrap:break-word}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);z-index:10;background:var(--night)}
+*{box-sizing:border-box}
+button,input,select,textarea{font:inherit;color:inherit}
+:focus-visible{outline:2px solid var(--ink);outline-offset:2px}
+a{color:var(--ink);text-underline-offset:3px}
+.wrap{max-width:1120px;margin:0 auto;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+
+/* 히어로 */
+.hero{position:relative;min-height:clamp(440px,52vw,600px);display:flex;align-items:flex-end;color:#fff;background:var(--night) var(--hero) center/cover no-repeat;overflow:hidden}
+.hero::before{content:"";position:absolute;inset:0;background:linear-gradient(90deg,rgba(9,12,28,.78) 0%,rgba(9,12,28,.45) 42%,rgba(9,12,28,0) 72%),linear-gradient(0deg,rgba(9,12,28,.55) 0%,rgba(9,12,28,0) 40%)}
+.hero canvas{position:absolute;inset:0;width:100%;height:100%;pointer-events:none}
+.hero-in{position:relative;width:100%;padding-block:56px 76px}
+.hero-date{display:inline-flex;align-items:center;gap:8px;font-size:14px;font-weight:500;background:rgba(255,255,255,.14);border:1px solid rgba(255,255,255,.28);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);border-radius:999px;padding:5px 14px}
+.hero-date b{color:#fff;background:var(--red);border-radius:999px;padding:0 9px;font-weight:700;font-variant-numeric:tabular-nums}
+.hero h1{font-family:var(--f-display);font-weight:700;font-size:clamp(38px,5.6vw,68px);line-height:1.12;letter-spacing:-1px;margin:18px 0 10px;max-width:9.5em;text-wrap:balance;text-shadow:0 2px 24px rgba(0,0,0,.35)}
+.hero-sub{margin:0;max-width:40ch;font-size:16px;line-height:1.55;color:rgba(255,255,255,.9)}
+.route{list-style:none;margin:26px 0 0;padding:0;display:flex;flex-wrap:wrap;gap:6px;align-items:center}
+.route li{display:flex;align-items:center;gap:6px}
+.route li+li::before{content:"";width:14px;height:1px;background:rgba(255,255,255,.55)}
+.route button{background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.3);color:#fff;border-radius:999px;padding:4px 12px;font-size:13.5px;font-weight:500;cursor:pointer;backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px);transition:background-color 160ms var(--ease)}
+.route button small{opacity:.75;margin-left:6px;font-variant-numeric:tabular-nums}
+.route button:hover{background:rgba(255,255,255,.24)}
+.route button[aria-pressed="true"]{background:#fff;color:var(--ink)}
+
+/* 알약 검색창 */
+.searchrow{position:relative;z-index:2;margin-top:-34px;display:flex;gap:10px;align-items:center}
+.search{flex:1;display:flex;align-items:center;gap:10px;background:#fff;border:1px solid var(--hair);border-radius:999px;padding:8px 8px 8px 24px;box-shadow:var(--lift);min-width:0}
+.search label{display:flex;flex-direction:column;flex:1;min-width:0;font-size:12px;font-weight:700;color:var(--ink)}
+.search input{border:0;background:transparent;padding:2px 0;font-size:15px;outline:none;min-width:0;color:var(--body)}
+.search input::placeholder{color:var(--muted)}
+.orb{flex:none;width:48px;height:48px;border-radius:50%;background:var(--red);display:grid;place-items:center}
+.btn{font-size:14.5px;font-weight:600;background:var(--ink);color:#fff;border:0;border-radius:var(--r-sm);padding:10px 18px;cursor:pointer;white-space:nowrap;transition:transform 140ms var(--ease),background-color 160ms var(--ease)}
+.btn:active{transform:scale(.97)}
+.btn.red{background:var(--red)}
+.btn.red:hover{background:var(--red-d)}
+.btn.ghost{background:#fff;color:var(--ink);border:1px solid var(--ink)}
+.btn.danger{background:#fff;color:var(--red);border:1px solid var(--red)}
+.btn.sm{font-size:13px;padding:6px 12px}
+.btn[disabled]{opacity:.35;cursor:default}
+.edit-toggle{flex:none;height:64px;border-radius:999px;padding:0 22px;box-shadow:var(--lift)}
+.edit-toggle.ghost{border-color:var(--hair)}
+
+/* 도시 사진 필터 */
+.cities{display:flex;gap:22px;overflow-x:auto;padding:28px 2px 6px;scrollbar-width:none}
+.cities::-webkit-scrollbar{display:none}
+.city{flex:none;display:flex;flex-direction:column;align-items:center;gap:8px;background:none;border:0;padding:0 0 10px;cursor:pointer;color:var(--muted);font-size:13px;font-weight:600;border-bottom:2px solid transparent;transition:color 160ms var(--ease)}
+.city .ph{width:64px;height:64px;border-radius:50%;background:var(--strong) var(--img) center/cover;box-shadow:0 0 0 1px var(--hair);transition:transform 200ms var(--ease)}
+.city .ph.all{display:grid;place-items:center;background:var(--soft)}
+.city:hover{color:var(--ink)}
+.city:hover .ph{transform:scale(1.04)}
+.city[aria-pressed="true"]{color:var(--ink);border-bottom-color:var(--ink)}
+
+/* 요약 */
+.status{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));border:1px solid var(--hair);border-radius:var(--r-md);margin-top:18px;overflow:hidden}
+.stat{padding:16px 18px;min-width:0;border-left:1px solid var(--hair)}
+.stat:first-child{border-left:0}
+.stat b{display:block;font-size:22px;font-weight:700;line-height:1.25;color:var(--ink);font-variant-numeric:tabular-nums;letter-spacing:-.3px}
+.stat span{font-size:13px;color:var(--muted)}
+.stat.next b{font-size:15.5px;line-height:1.4;font-weight:600}
+.bar{height:6px;border-radius:3px;background:var(--strong);overflow:hidden;margin-top:6px}
+.bar i{display:block;height:100%;background:var(--pine)}
+.banner{margin-top:16px;background:var(--gold-soft);border-radius:var(--r-md);padding:12px 16px;display:flex;gap:10px;align-items:center;flex-wrap:wrap}
+.banner span{flex:1 1 240px;font-size:14px;color:var(--ink)}
+
+/* 탭 */
+.tabs{display:flex;gap:26px;overflow-x:auto;border-bottom:1px solid var(--hair);margin-top:36px;scrollbar-width:none}
+.tabs::-webkit-scrollbar{display:none}
+.tab{background:none;border:0;padding:12px 0;font-size:15px;font-weight:600;color:var(--muted);cursor:pointer;white-space:nowrap;border-bottom:2px solid transparent;margin-bottom:-1px;transition:color 160ms var(--ease)}
+.tab:hover{color:var(--ink)}
+.tab[aria-selected="true"]{color:var(--ink);border-bottom-color:var(--ink)}
+.tab .n{font-size:11.5px;font-weight:700;background:var(--strong);color:var(--ink);border-radius:999px;padding:1px 7px;margin-left:6px}
+.panel{padding-block:24px 8px;min-height:240px}
+.panel-top{display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap;margin-bottom:20px}
+.panel-top p{margin:0;color:var(--muted);font-size:14.5px;max-width:62ch}
+.kinds{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:20px}
+.chip{font-size:13.5px;font-weight:500;border:1px solid var(--hair);border-radius:999px;padding:6px 14px;background:#fff;cursor:pointer;color:var(--ink);transition:border-color 160ms var(--ease)}
+.chip:hover{border-color:var(--ink)}
+.chip[aria-pressed="true"]{background:var(--ink);color:#fff;border-color:var(--ink)}
+
+/* 카드 */
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(290px,1fr));gap:16px}
+.card{background:#fff;border:1px solid var(--hair);border-radius:var(--r-md);padding:18px;min-width:0;display:flex;flex-direction:column;gap:8px;transition:box-shadow 200ms var(--ease)}
+.card:hover{box-shadow:var(--lift)}
+.card h3{margin:0;font-size:17px;font-weight:700;line-height:1.35;color:var(--ink);letter-spacing:-.2px;text-wrap:balance}
+.card p{margin:0;font-size:14px;color:var(--body)}
+.meta{display:flex;gap:6px;flex-wrap:wrap;align-items:center}
+.pill{font-size:12px;font-weight:700;border-radius:6px;padding:2px 8px;line-height:1.5;white-space:nowrap;background:var(--soft);color:var(--ink)}
+.city-dot{display:inline-flex;align-items:center;gap:6px;font-size:12.5px;font-weight:600;color:var(--muted)}
+.city-dot::before{content:"";width:18px;height:18px;border-radius:50%;background:var(--strong) var(--img) center/cover;box-shadow:0 0 0 1px var(--hair)}
+.v-필수{color:#fff;background:var(--red)}.v-추천{color:var(--pine);background:var(--pine-soft)}.v-선택{color:var(--muted);background:var(--soft)}.v-기념일{color:var(--gold);background:var(--gold-soft)}.v-패스{color:var(--muted);background:var(--soft);text-decoration:line-through}
+.edit-row{display:flex;gap:6px;margin-top:auto;padding-top:8px}
+.src-link{font-size:13.5px;font-weight:600;word-break:break-all}
+.alert{font-size:14px;background:var(--gold-soft);color:#5a4210;border-radius:var(--r-sm);padding:10px 14px}
+.stay{font-size:14px;color:var(--muted)}
+.stay b{color:var(--ink);font-weight:600}
+
+/* 일정: 퀘스트 로그 */
+.ql-days{display:flex;gap:8px;overflow-x:auto;padding:2px 2px 18px;scrollbar-width:none}
+.ql-days::-webkit-scrollbar{display:none}
+.ql-day{flex:none;display:flex;flex-direction:column;align-items:center;gap:0;min-width:66px;padding:8px 10px;border:1px solid var(--hair);border-radius:var(--r-md);background:#fff;cursor:pointer;font-variant-numeric:tabular-nums;color:var(--ink);transition:border-color 160ms var(--ease)}
+.ql-day:hover{border-color:var(--ink)}
+.ql-day b{font-size:17px;font-weight:700;line-height:1.3}
+.ql-day span{font-size:11.5px;color:var(--muted)}
+.ql-day i{width:6px;height:6px;border-radius:50%;background:var(--c);margin-top:4px}
+.ql-day[aria-pressed="true"]{background:var(--ink);border-color:var(--ink);color:#fff}
+.ql-day[aria-pressed="true"] span{color:rgba(255,255,255,.7)}
+.ql-day.done-all b::after{content:" ✓";font-size:12px;color:var(--pine)}
+.ql-day[aria-pressed="true"].done-all b::after{color:#8fd6b0}
+.day-hero{position:relative;border-radius:var(--r-md);overflow:hidden;min-height:clamp(200px,26vw,280px);display:flex;align-items:flex-end;background:var(--night) var(--img) center/cover;color:#fff}
+.day-hero::before{content:"";position:absolute;inset:0;background:linear-gradient(0deg,rgba(9,12,28,.78) 0%,rgba(9,12,28,.15) 60%,rgba(9,12,28,0) 100%)}
+.day-hero>div{position:relative;padding:20px 22px;width:100%;display:flex;justify-content:space-between;align-items:flex-end;gap:14px;flex-wrap:wrap}
+.day-hero small{display:block;font-size:13.5px;opacity:.88}
+.day-hero h2{margin:2px 0 0;font-family:var(--f-display);font-weight:700;font-size:clamp(24px,3vw,32px);line-height:1.2;text-wrap:balance}
+.ql-nav{display:flex;gap:8px}
+.ql-nav .btn{background:rgba(255,255,255,.95);color:var(--ink)}
+.ql-meta{display:flex;flex-direction:column;gap:10px;margin-top:16px}
+.ql-prog{display:flex;align-items:center;gap:12px;margin:18px 0 14px;font-size:13.5px;font-weight:700;color:var(--ink);font-variant-numeric:tabular-nums}
+.ql-bar{flex:1;height:8px;border-radius:4px;background:var(--strong);overflow:hidden}
+.ql-bar i{display:block;height:100%;background:var(--pine);transform-origin:left center;transition:transform 240ms var(--ease)}
+.ql-list{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;border-top:1px solid var(--hair)}
+.ql-item{display:grid;grid-template-columns:36px 58px 1fr;gap:12px;align-items:center;padding:12px 4px;border-bottom:1px solid var(--hair-soft)}
+.ql-list.enter .ql-item{animation:qlIn 280ms var(--ease) both;animation-delay:calc(var(--i)*30ms)}
+.ql-item.next{background:linear-gradient(90deg,var(--red-soft),transparent 70%)}
+.ql-item.done .ql-text,.ql-item.done .ql-time{color:var(--muted);text-decoration:line-through}
+.ql-check{width:28px;height:28px;border:1.5px solid var(--border,#b0b0b0);border-radius:50%;background:#fff;cursor:pointer;display:grid;place-items:center;padding:0;transition:transform 140ms var(--ease),background-color 160ms var(--ease),border-color 160ms var(--ease)}
+.ql-check:active{transform:scale(.9)}
+.ql-check svg{width:15px;height:15px;transform:scale(0);transition:transform 200ms var(--ease)}
+.ql-check[aria-pressed="true"]{background:var(--pine);border-color:var(--pine)}
+.ql-check[aria-pressed="true"] svg{transform:scale(1)}
+.ql-time{font-variant-numeric:tabular-nums;font-weight:700;color:var(--ink);font-size:14px}
+.ql-text{font-size:15px;min-width:0;color:var(--body)}
+.ql-next{font-size:11.5px;font-weight:700;color:#fff;background:var(--red);border-radius:999px;padding:1px 8px;margin-right:8px;vertical-align:1px}
+@keyframes qlIn{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
+
+/* 퀘스트 */
+.quests{display:flex;flex-direction:column;border-top:1px solid var(--hair)}
+.quest{display:grid;grid-template-columns:36px 1fr auto;gap:12px;align-items:start;padding:14px 4px;border-bottom:1px solid var(--hair-soft)}
+.quest.done .q-text{text-decoration:line-through;color:var(--muted)}
+.check{width:28px;height:28px;border:1.5px solid #b0b0b0;border-radius:50%;background:#fff;cursor:pointer;display:grid;place-items:center;padding:0;transition:background-color 160ms var(--ease)}
+.check[aria-pressed="true"]{background:var(--pine);border-color:var(--pine)}
+.check svg{width:15px;height:15px;opacity:0}
+.check[aria-pressed="true"] svg{opacity:1}
+.q-text{font-weight:600;font-size:15.5px;color:var(--ink)}
+.q-note{font-size:13.5px;color:var(--muted);margin-top:2px}
+.due{font-size:15px;font-weight:700;text-align:right;white-space:nowrap;font-variant-numeric:tabular-nums;color:var(--ink)}
+.due small{display:block;font-size:12px;font-weight:600}
+.due.hot small{color:var(--red)}.due.warm small{color:var(--gold)}.due.cool small{color:var(--muted)}
+.prio-긴급{color:#fff;background:var(--red)}.prio-보통{color:var(--ink);background:var(--soft)}.prio-선택{color:var(--muted);background:var(--soft)}
+
+/* 투어 */
+.kv{display:grid;grid-template-columns:auto 1fr;gap:4px 12px;font-size:13.5px;margin:4px 0}
+.kv dt{color:var(--muted);white-space:nowrap}
+.kv dd{margin:0;min-width:0;overflow-wrap:anywhere;color:var(--ink)}
+.pick-1순위{color:#fff;background:var(--red)}.pick-대안{color:var(--pine);background:var(--pine-soft)}.pick-비추천{color:var(--muted);background:var(--soft);text-decoration:line-through}.pick-참고{color:var(--ink);background:var(--soft)}
+
+/* 예산 */
+.money{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px;margin-bottom:22px}
+.money .card span{font-size:13.5px;color:var(--muted)}
+.money .card b{font-size:26px;font-weight:700;color:var(--ink);font-variant-numeric:tabular-nums;letter-spacing:-.4px}
+.cat-bars{display:flex;flex-direction:column;gap:10px;margin-bottom:22px}
+.cat-row{display:grid;grid-template-columns:84px 1fr 116px;gap:12px;align-items:center;font-size:14px;color:var(--ink)}
+.cat-track{height:10px;background:var(--strong);border-radius:5px;overflow:hidden;display:flex}
+.cat-track i{display:block;height:100%}
+.cat-row span:last-child{text-align:right;font-variant-numeric:tabular-nums}
+.legend{display:flex;gap:16px;font-size:13px;color:var(--muted);margin-bottom:10px}
+.legend i{display:inline-block;width:10px;height:10px;border-radius:50%;vertical-align:0;margin-right:5px}
+.tbl-wrap{overflow-x:auto;border:1px solid var(--hair);border-radius:var(--r-md)}
+table{border-collapse:collapse;width:100%;font-size:14px;background:#fff}
+th,td{text-align:left;padding:11px 14px;border-bottom:1px solid var(--hair-soft);vertical-align:top}
+th{font-weight:700;font-size:13px;color:var(--muted)}
+td.num{text-align:right;font-variant-numeric:tabular-nums;white-space:nowrap;color:var(--ink);font-weight:600}
+.st-결제완료{color:var(--pine);background:var(--pine-soft)}.st-예상{color:var(--gold);background:var(--gold-soft)}
+
+/* 점검·꿀팁 */
+.sev-수정{color:#fff;background:var(--red)}.sev-보완{color:var(--gold);background:var(--gold-soft)}.sev-확인{color:var(--pine);background:var(--pine-soft)}
+.fix-body{white-space:pre-line}
+.src-유튜브{color:#fff;background:#c4302b}.src-인스타그램{color:#fff;background:#a33a9c}.src-블로그{color:var(--pine);background:var(--pine-soft)}.src-커뮤니티{color:var(--ink);background:var(--soft)}
+
+.empty{text-align:center;padding:48px 10px;color:var(--muted)}
+.empty b{display:block;font-size:17px;color:var(--ink);margin-bottom:4px}
+.foot{color:var(--muted);font-size:13px;padding-block:40px 120px;border-top:1px solid var(--hair);margin-top:48px}
+
+/* 저장줄·모달·토스트 */
+.savebar{position:fixed;left:0;right:0;bottom:0;z-index:20;background:#fff;border-top:1px solid var(--hair);box-shadow:0 -6px 16px rgba(0,0,0,.06);padding:12px max(16px,env(safe-area-inset-right,0px)) calc(12px + env(safe-area-inset-bottom,0px)) max(16px,env(safe-area-inset-left,0px));display:flex;gap:10px;align-items:center;justify-content:center;flex-wrap:wrap}
+.savebar span{font-size:14px;color:var(--ink);font-weight:500}
+.modal{position:fixed;inset:0;z-index:30;background:rgba(0,0,0,.45);display:grid;place-items:center;padding:20px max(16px,env(safe-area-inset-right,0px)) 20px max(16px,env(safe-area-inset-left,0px))}
+.modal .win{width:min(560px,100%);max-height:calc(100% - 20px);display:flex;flex-direction:column;background:#fff;border-radius:var(--r-md);box-shadow:0 8px 28px rgba(0,0,0,.28);animation:pop 220ms var(--ease)}
+.win-h{font-size:16px;font-weight:700;color:var(--ink);text-align:center;padding:16px;border-bottom:1px solid var(--hair)}
+.win-b{padding:20px}
+@keyframes pop{from{opacity:0;transform:scale(.97) translateY(8px)}to{opacity:1;transform:none}}
+.modal form{display:flex;flex-direction:column;gap:14px}
+.fld{display:flex;flex-direction:column;gap:6px;font-size:13px;font-weight:700;color:var(--ink)}
+.fld input,.fld select,.fld textarea{font-weight:400;font-size:15px;color:var(--ink);background:#fff;border:1px solid #b0b0b0;border-radius:var(--r-sm);padding:10px 12px;width:100%}
+.fld input:focus,.fld select:focus,.fld textarea:focus{outline:2px solid var(--ink);outline-offset:0;border-color:var(--ink)}
+.fld textarea{min-height:96px;resize:vertical}
+.fld textarea.lines{min-height:220px;font-variant-numeric:tabular-nums}
+.form-act{display:flex;gap:8px;justify-content:flex-end;padding-top:6px}
+.toast{position:fixed;left:50%;bottom:calc(88px + env(safe-area-inset-bottom,0px));transform:translateX(-50%);z-index:40;background:var(--ink);color:#fff;border-radius:var(--r-sm);padding:10px 16px;font-size:14px;font-weight:500;box-shadow:var(--lift);max-width:calc(100% - 32px)}
+.ai-note{font-size:12px;color:rgba(255,255,255,.6);position:absolute;right:max(16px,env(safe-area-inset-right,0px));bottom:44px}
+
+@media (max-width:760px){
+  .hero::before{background:linear-gradient(0deg,rgba(9,12,28,.85) 0%,rgba(9,12,28,.4) 55%,rgba(9,12,28,.1) 100%)}
+  .hero-in{padding-block:48px 72px}
+  .status{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .stat:nth-child(3){border-left:0}
+  .stat:nth-child(n+3){border-top:1px solid var(--hair)}
+  .money{grid-template-columns:1fr}
+  .cat-row{grid-template-columns:70px 1fr 96px}
+  .grid{grid-template-columns:1fr}
+  .quest{grid-template-columns:32px 1fr}
+  .quest .due{grid-column:2;text-align:left}
+  .edit-toggle{height:56px;padding:0 16px}
+  .search{padding-left:18px}
+  .orb{width:40px;height:40px}
+  .ql-item{grid-template-columns:32px 50px 1fr;gap:10px}
+  .ai-note{bottom:auto;top:12px}
+}
+@media (prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important}}
+</style>
+<div id="app"></div>
+<script type="application/json" id="trip-data">{"meta":{"title":"두 사람의 크리스마스 원정","sub":"2026년 12월 12일 출발, 프라하에서 부다페스트까지 8박 9일 신혼여행","start":"2026-12-12","updated":"2026-11-02T17:00:00.000Z"},"days":[{"id":"d11","date":"2026-12-11","city":"공통","title":"출국 전날 밤","stay":"기내 (카타르항공, 1회 경유)","alert":"","items":[["21:00","인천공항 도착 (출발 3시간 전)"],["00:20","12일 0시 20분 출발, 프라하 13:25 도착"],["메모","유로 동전·코루나 현금 소액 준비 (페리, 사물함, 현금 전용 펍)"]]},{"id":"d12","date":"2026-12-12","city":"프라하","title":"프라하 도착, 구시가지 마켓","stay":"유니타스 호텔 (12~15일 3박)","alert":"","items":[["13:25","공항 도착 → 59번 버스 + 지하철 A선 (90분권 40 CZK) 또는 Bolt €18~25"],["15:00","유니타스 호텔 체크인"],["16:00","하벨 시장 → 구시가지 광장 크리스마스 마켓"],["16:30","구시청사 탑에서 해 질 녘 + 트리 점등 쇼 (매시 30분)"],["18:30","로칼 들로우하 저녁 (탱크 필스너)"],["20:30","우 즐라테호 티그라(현금만) 또는 우 메드비드쿠 한 잔 → 카를교 야경"]]},{"id":"d13","date":"2026-12-13","city":"프라하","title":"프라하 성과 말라 스트라나","stay":"유니타스 호텔","alert":"드레스덴(14일 월요일)과 날짜를 바꾸면 드레스덴 미술관이 열린 일요일에 갈 수 있어요. 보고서 점검 탭 참고.","items":[["08:30","스트라호프 수도원 도서관"],["09:30","프라하 성 (기본 투어 450 CZK, 한국어 오디오)"],["12:00","제1광장 근위병 교대식"],["13:00","스트라호프 양조장 점심"],["14:30","네루도바 거리 → 존 레넌 벽 → 캄파 섬 마켓"],["16:00","카를교 가스등 점등 퍼포먼스 + 해 질 녘"],["16:30","(선택) 맥주 스파, 2인 60분 3,290 CZK 이하일 때만"],["19:00","필드(미쉐린 1스타) 기념일 디너 또는 우 칼렌두"]]},{"id":"d14","date":"2026-12-14","city":"드레스덴","title":"드레스덴 당일치기","stay":"유니타스 호텔","alert":"월요일이라 츠빙거 고전회화관이 쉬어요. 마켓만 볼 거면 그대로, 미술관까지 보려면 13일(일)과 교체하세요. 다음 날 새벽 5시 픽업이니 일찍 복귀.","items":[["08:30","프라하 중앙역 EC 열차 (약 2시간 20분, 편도 €8~19)"],["11:00","성모교회 → 군주의 행렬 벽화 → 브륄의 테라스"],["12:00","크로이츠 교회 전망대에서 마켓 내려다보기"],["13:00","조피엔켈러 점심"],["14:00","슈트리첼마르크트 (11/25~12/24, 10~21시) · 글뤼바인 머그는 보증금제"],["17:00","열차로 프라하 복귀 (지연·플랫폼 변경 잦음)"],["21:00","짐 싸고 호텔 프런트에 새벽 체크아웃 정산"]]},{"id":"d15","date":"2026-12-15","city":"할슈타트","title":"체스키크룸로프 거쳐 할슈타트","stay":"할슈타트 숙소 (Dr.-Friedrich-Morton-Weg 24, 1박)","alert":"투어 업체에 할슈타트 하차, 도착 예정 시각, 캐리어 2개 크기를 글로 확약받아야 해요.","items":[["05:00","호텔 픽업"],["08:00","체스키크룸로프 (성탑·성 박물관만 개방, 화~일 9:00~15:30)"],["10:00","고사우 호수 사진 정차"],["12:30","할슈타트 하차 (추정) → 숙소에 짐 맡기기"],["13:00","제비르트 차우너 점심"],["13:30","스카이워크 (푸니쿨라 왕복 €29, 마지막 하행 16:30)"],["16:00","엽서 뷰포인트(Gosaumühlstraße) · Müllerstiege 계단"],["17:30","예약한 저녁 → 20시 전에 마트·맥주 장보기 (가게 대부분 20시 마감)"]]},{"id":"d16","date":"2026-12-16","city":"빈","title":"할슈타트 → 빈 → 부다페스트","stay":"실버 크라운 호텔 (16~19일 3박)","alert":"07:00 배는 평일·학교 수업일에만 다녀요. 12/13 새 시간표를 확인하고, 없으면 08:10 배 또는 차량 이동으로 바꾸세요.","items":[["06:15","(선택) 새벽 블루아워 호수 반영샷"],["06:45","체크아웃 → 마르크트 선착장"],["07:00","페리 (현금만)"],["07:14","지역 열차 → 아트낭-푸흐하임 환승"],["09:01","레일젯 → 11:03 빈 중앙역"],["11:15","중앙역 지하 사물함 (유로 동전 필요) 또는 Radical Storage"],["11:45","벨베데레 상궁, 클림트 〈키스〉 (시간 지정권)"],["13:00","피글뮐러 또는 플라후타 점심"],["14:30","카를 성당 → 오페라 → 케른트너 거리 → 슈테판 대성당"],["16:00","그라벤 → 콜마르크트(데멜) → 시청 광장 마켓"],["17:40","열차 출발 → 20:17 켈레티역 (또는 18:42 → 21:19)"],["20:30","Bolt로 호텔 (역 앞 호객 택시 피하기)"]]},{"id":"d17","date":"2026-12-17","city":"부다페스트","title":"국회의사당과 다뉴브 야경","stay":"실버 크라운 호텔","alert":"","items":[["09:00","국회의사당 (사전 예약, 1인 14,000 HUF, 여권)"],["10:30","다뉴브 강변 신발 추모비 → 성 이슈트반 대성당 돔"],["12:30","헝가리쿰 비스트로 점심"],["14:00","도하니 시나고그 (토요일 휴관이라 오늘)"],["16:00","대성당 앞 마켓 → 뵈뢰슈머르티 마켓"],["18:00","레젠다 다뉴브 야경 크루즈"],["20:00","보르코냐(미쉐린 1스타) 기념일 디너"]]},{"id":"d18","date":"2026-12-18","city":"부다페스트","title":"부다 언덕과 온천","stay":"실버 크라운 호텔","alert":"","items":[["07:00","어부의 요새 일출 (일출 약 7:30, 9시 전 무료)"],["09:00","마차시 성당 → 부다 성 지구 산책"],["12:30","스탄드25 비스트로 점심"],["14:00","세체니 다리 → 세체니 온천 (금 14,800 HUF)"],["17:00","겔레르트 언덕 일몰·야경 (선택)"],["19:00","엘레스퇴·그래비티·Csapszék 수제 맥주"],["22:00","(선택) 루다시 야간 온천, 금·토 22~03시"]]},{"id":"d19","date":"2026-12-19","city":"부다페스트","title":"마지막 날, 귀국","stay":"기내","alert":"","items":[["09:00","중앙시장 (토 06~15시, 오후 늦게는 닫음)"],["11:00","언드라시 거리 → 오페라하우스 → 영웅광장"],["13:00","점심"],["16:00","공항으로 (Bolt 또는 100E 공항버스 2,500 HUF)"],["19:30","부다페스트 출발 → 12/20 14:10 인천 도착"]]}],"quests":[{"id":"q1","text":"15일 투어 예약 (KKday 546626 또는 마이리얼트립 #3427309)","due":"2026-11-10","prio":"긴급","done":false,"note":"할슈타트 숙소 앞 하차, 도착 예정 시각, 큰 캐리어 2개 크기를 메시지로 확약받기. 무료 취소는 출발 30일 전(11/15경)까지.","url":"https://www.kkday.com/ko/product/546626"},{"id":"q2","text":"귀국편 정보 하나로 정리","due":"2026-11-05","prio":"긴급","done":false,"note":"노션 메모(터키항공 14:00)와 지출표(19:30 출발 14:10 도착)가 달라요. 실제 e-티켓 기준으로 고치기.","url":""},{"id":"q3","text":"할슈타트 숙소에 이메일","due":"2026-11-12","prio":"긴급","done":false,"note":"밴이 들어올 수 있는 곳, 차량 등록 가능 여부, 체크인 전 짐 보관, 숙소 정확한 이름 확인","url":""},{"id":"q4","text":"필드(프라하) 기념일 디너 예약","due":"2026-11-15","prio":"긴급","done":false,"note":"미쉐린 1스타, 몇 주 전 예약 필요. 드레스덴과 날짜를 바꾸면 14일(월) 영업 여부 확인","url":""},{"id":"q5","text":"보르코냐(부다페스트) 기념일 디너 예약","due":"2026-11-15","prio":"긴급","done":false,"note":"17일 20시 목표","url":""},{"id":"q6","text":"국회의사당 입장권 (jegymester.hu)","due":"2026-11-15","prio":"긴급","done":false,"note":"17일 오전 영어 투어, 1인 14,000 HUF, 입장 때 여권","url":""},{"id":"q7","text":"드레스덴 날짜 결정 + 프라하↔드레스덴 EC 열차","due":"2026-11-20","prio":"보통","done":false,"note":"13일(일)과 14일(월) 중 선택. cd.cz 또는 bahn.de 사전 할인 요금","url":""},{"id":"q8","text":"빈→부다페스트 열차 (할인권 + 좌석 지정)","due":"2026-11-25","prio":"보통","done":false,"note":"MÁV €13~ 또는 ÖBB 스파시네 €19.90~. 환불 불가라 17:40과 18:42 중 하나로","url":""},{"id":"q9","text":"할슈타트 15일 저녁 17:30 예약","due":"2026-11-25","prio":"보통","done":false,"note":"제비르트 차우너 또는 그뤼너 바움","url":""},{"id":"q10","text":"할슈타트→빈 ÖBB 통합권","due":"2026-12-01","prio":"보통","done":false,"note":"12/13부터 새 시간표. 07:00 배가 남는지 보고 구매. 안 되면 Daytrip 차량 이동 검토","url":""},{"id":"q11","text":"빈 준비: 사물함, 벨베데레 시간 지정권, 피글뮐러","due":"2026-12-05","prio":"보통","done":false,"note":"사물함은 유로 동전 필요","url":""},{"id":"q12","text":"식당 예약: 로칼 들로우하, 우 칼렌두, 헝가리쿰 비스트로","due":"2026-12-05","prio":"보통","done":false,"note":"","url":""},{"id":"q13","text":"온천(세체니 또는 루다시 야간)과 레젠다 크루즈","due":"2026-12-05","prio":"보통","done":false,"note":"공식 사이트에서만 구매. 세체니 앞 가짜 티켓 판매상 주의","url":""},{"id":"q14","text":"12월 첫째 주 다시 확인","due":"2026-12-07","prio":"보통","done":false,"note":"새 페리·열차 시간표, 도하니 운영 시간, 성 스타벅스·카페 첸트랄 영업","url":""},{"id":"q15","text":"유니타스 호텔에 15일 새벽 체크아웃 알리기","due":"2026-12-08","prio":"보통","done":false,"note":"05:00 픽업이라 전날 정산, 열쇠 반납 방법, 조식 박스 가능 여부","url":""},{"id":"q16","text":"실버 크라운에 늦은 체크인 알리기","due":"2026-12-08","prio":"보통","done":false,"note":"16일 21시 이후 도착 가능","url":""},{"id":"q17","text":"현금 준비 (유로 동전, 코루나, 포린트 소액)","due":"2026-12-10","prio":"보통","done":false,"note":"페리·사물함·현금 전용 펍. 카드 결제 때 원화 결제(DCC)는 거절","url":""},{"id":"q18","text":"맥주 스파 예약","due":"2026-12-05","prio":"선택","done":false,"note":"2인 60분 3,290 CZK보다 쌀 때만","url":""}],"places":[{"id":"p1","name":"프라하 성","city":"프라하","kind":"관광","verdict":"필수","note":"기본 투어 450 CZK, 표는 이틀 유효, 한국어 오디오 가이드. 매일 12:00 근위병 교대식","url":"https://prague.eu/en/objevujte/prague-castle-prazsky-hrad/"},{"id":"p2","name":"구시가지 광장 크리스마스 마켓","city":"프라하","kind":"관광","verdict":"필수","note":"11/28경~1/6, 매일 10~22시. 트리 점등 쇼 16:30~21:30 매시 30분. 밤에 가세요","url":"https://www.pragueexperience.com/events/christmas-markets.asp"},{"id":"p3","name":"카를교 야경과 16시 가스등 점등","city":"프라하","kind":"관광","verdict":"필수","note":"12월에는 매일 16시쯤 가스등 점등 퍼포먼스. 사람 없는 사진은 해 뜰 무렵","url":"https://www.instagram.com/p/DSSY_2KjddI/"},{"id":"p4","name":"구시청사 탑","city":"프라하","kind":"관광","verdict":"추천","note":"해 질 녘 마켓 내려다보기. 엘리베이터 100 CZK","url":""},{"id":"p5","name":"캄파 섬 크리스마스 마켓","city":"프라하","kind":"관광","verdict":"추천","note":"12/3~1/4, 10~20시","url":""},{"id":"p6","name":"스트라호프 수도원 도서관","city":"프라하","kind":"관광","verdict":"추천","note":"가격·시간 미확인","url":""},{"id":"p7","name":"천문시계","city":"프라하","kind":"관광","verdict":"선택","note":"정시 인형 쇼는 짧아요. 구시청사 탑이 더 나음","url":""},{"id":"p8","name":"존 레넌 벽","city":"프라하","kind":"관광","verdict":"선택","note":"카를교 → 캄파 가는 길에 5분 사진","url":""},{"id":"p9","name":"화약탑","city":"프라하","kind":"관광","verdict":"선택","note":"겉에서 사진만","url":""},{"id":"p10","name":"국립박물관","city":"프라하","kind":"관광","verdict":"선택","note":"광물·화석 전시가 꽤 있음(노션 메모). 시간 남을 때","url":""},{"id":"p11","name":"브르트바 정원","city":"프라하","kind":"관광","verdict":"패스","note":"4~10월에만 열어서 12월엔 닫혀 있어요","url":"https://www.vrtbovska.cz/en/opening-hours"},{"id":"p12","name":"성 스타벅스","city":"프라하","kind":"카페","verdict":"선택","note":"전망 커피 한 잔. 2026년 운영 미확인","url":""},{"id":"p13","name":"레트나 파노라마","city":"프라하","kind":"관광","verdict":"선택","note":"늦은 오후 시내 전경 포토스팟","url":"https://bestpragueguide.com/en/blog/prague-instagram-photo-spots"},{"id":"p14","name":"맥주 스파 베르나르드","city":"프라하","kind":"체험","verdict":"선택","note":"2인 60분 3,290 CZK. 홉 욕조 + 셀프 맥주 무제한","url":"https://beerspabernard.com/en/pricelist"},{"id":"p15","name":"로칼 들로우하","city":"프라하","kind":"식당","verdict":"필수","note":"탱크 필스너와 체코 정식(스비치코바, 굴라시). 예약 권장","url":""},{"id":"p16","name":"우 즐라테호 티그라","city":"프라하","kind":"맥주","verdict":"추천","note":"시내 최고 수준 필스너. 현금만, 일찍 가야 자리, 잔 비우면 계속 채워 줌","url":"https://www.reddit.com/r/Prague/comments/1r5b0dc/mustvisit_pubs_in_pragues_old_town/"},{"id":"p17","name":"우 칼렌두","city":"프라하","kind":"식당","verdict":"추천","note":"미쉐린 비브 구르망","url":""},{"id":"p18","name":"우 메드비드쿠","city":"프라하","kind":"맥주","verdict":"추천","note":"탱크 부드바르, 돼지 무릎(콜레노)","url":""},{"id":"p19","name":"우 체르네호 볼라","city":"프라하","kind":"맥주","verdict":"선택","note":"성 근처 오래된 펍, 커뮤니티 추천","url":"https://www.reddit.com/r/Prague/comments/1vcxasn/pub_recs/"},{"id":"p20","name":"스트라호프 양조장","city":"프라하","kind":"맥주","verdict":"추천","note":"맛은 좋지만 비싸요. 성 관광과 묶어 점심","url":""},{"id":"p21","name":"우 핑카수 / 칸티나","city":"프라하","kind":"식당","verdict":"선택","note":"핑카수는 체코 정찬, 칸티나는 정육식당","url":""},{"id":"p22","name":"필드","city":"프라하","kind":"식당","verdict":"기념일","note":"미쉐린 1스타. 몇 주 전 예약","url":""},{"id":"p23","name":"우 플레쿠","city":"프라하","kind":"맥주","verdict":"선택","note":"한 잔만. 식사는 하지 말고 '무료 샷'은 거절","url":"https://boakandbailey.com/tag/tourist-traps/"},{"id":"p24","name":"슈트리첼마르크트","city":"드레스덴","kind":"관광","verdict":"필수","note":"2026-11-25~12-24, 매일 10~21시. 머그 보증금제, 현금 전용 가게 많음","url":"https://striezelmarkt.dresden.de/en/"},{"id":"p25","name":"크로이츠 교회 전망대","city":"드레스덴","kind":"관광","verdict":"추천","note":"마켓을 위에서 내려다보는 필수 뷰","url":"https://m.blog.naver.com/alswn0692/223679276561"},{"id":"p26","name":"츠빙거 고전회화관","city":"드레스덴","kind":"관광","verdict":"추천","note":"화~일 10~17시, 월요일 휴관. 안뜰은 무료","url":"https://www.dresden.de/de/tourismus/sehen/museen-kunst-und-kultur.php"},{"id":"p27","name":"성모교회, 군주의 행렬, 브륄의 테라스","city":"드레스덴","kind":"관광","verdict":"추천","note":"걸어서 한 번에","url":""},{"id":"p28","name":"조피엔켈러","city":"드레스덴","kind":"식당","verdict":"선택","note":"4.1점, 지하 연회장 분위기","url":""},{"id":"p29","name":"체스키크룸로프 성탑·성 박물관","city":"체스키크룸로프","kind":"관광","verdict":"추천","note":"11/1~12/20 화~일 9:00~15:30. 15일이 화요일이라 가능. 성 내부 투어는 겨울 휴관","url":"https://www.zamek-ceskykrumlov.cz/en/plan-your-visit/opening-hours"},{"id":"p30","name":"망토 다리와 성 안뜰","city":"체스키크룸로프","kind":"관광","verdict":"필수","note":"무료. 눈 오면 미끄러우니 미끄럼 방지 신발","url":""},{"id":"p31","name":"바르비르나","city":"체스키크룸로프","kind":"식당","verdict":"선택","note":"강가 굴라시 맛집 (개인 차량일 때)","url":"https://blog.naver.com/PostView.naver?blogId=hj332018&logNo=224436383234&redirect=Dlog"},{"id":"p32","name":"크르치마 브 샤틀라프스케","city":"체스키크룸로프","kind":"식당","verdict":"선택","note":"중세식 화덕 그릴, 개인 차량으로 오래 머물 때","url":""},{"id":"p33","name":"스카이워크 (소금광산 푸니쿨라)","city":"할슈타트","kind":"관광","verdict":"필수","note":"왕복 €29. 11/2~1/6 운영, 9:00~16:30 마지막 하행. 12/24·31만 휴무","url":"https://www.salzwelten.at/en/hallstatt/prices-opening-hours"},{"id":"p34","name":"엽서 뷰포인트 (Gosaumühlstraße)","city":"할슈타트","kind":"관광","verdict":"필수","note":"겨울엔 7:00~8:30 블루아워 또는 오후. 1박이라 저녁 조명 반영샷도 가능","url":"https://www.nomadepicureans.com/europe/austria/hallstatt-photography-guide-2026-sunrise-sunset-map/"},{"id":"p35","name":"Müllerstiege 계단","city":"할슈타트","kind":"관광","verdict":"선택","note":"숨은 포토스팟. 구글맵에 apartment Müllerstiege 검색","url":"https://www.instagram.com/reel/DRtuaQmgrW4/"},{"id":"p36","name":"소금광산 투어","city":"할슈타트","kind":"관광","verdict":"패스","note":"마지막 투어 15:00, 몇 시간 걸려서 이번 일정엔 무리","url":""},{"id":"p37","name":"다흐슈타인 5핑거스·얼음동굴","city":"할슈타트","kind":"관광","verdict":"패스","note":"겨울 운영이 12/19부터","url":""},{"id":"p38","name":"납골당","city":"할슈타트","kind":"관광","verdict":"선택","note":"운영 시간이 출처마다 달라요","url":""},{"id":"p39","name":"제비르트 차우너","city":"할슈타트","kind":"식당","verdict":"추천","note":"겨울에도 영업, 호수 생선. 15일 점심·저녁 1순위","url":""},{"id":"p40","name":"그뤼너 바움 잘츠바론","city":"할슈타트","kind":"식당","verdict":"추천","note":"호숫가 레스토랑","url":""},{"id":"p41","name":"벨베데레 상궁","city":"빈","kind":"관광","verdict":"필수","note":"클림트 〈키스〉. 매일 9~18시, €23, 시간 지정권","url":""},{"id":"p42","name":"시청 광장 크리스마스 마켓","city":"빈","kind":"관광","verdict":"필수","note":"11/13경~12/26, 10~22시. 아이스링크, 하트 트리","url":"https://www.vienna-unwrapped.com/vienna-christmas-market/"},{"id":"p43","name":"슈테판 대성당과 광장 마켓","city":"빈","kind":"관광","verdict":"추천","note":"마켓 11~21시","url":""},{"id":"p44","name":"쇤브룬 궁전","city":"빈","kind":"관광","verdict":"패스","note":"왕복·관람 2시간 이상, 경유 일정엔 무리","url":""},{"id":"p45","name":"빈 중앙역 사물함","city":"빈","kind":"교통","verdict":"필수","note":"지하 1층, 5종 €2~4.5, 유로 동전. 대안 Radical Storage €5/일","url":"https://radicalstorage.com/ko_kr/luggage-storage/bienna/main-station"},{"id":"p46","name":"피글뮐러","city":"빈","kind":"식당","verdict":"추천","note":"슈니첼 약 €28, 예약 안 하면 30~45분 대기","url":""},{"id":"p47","name":"플라후타","city":"빈","kind":"식당","verdict":"추천","note":"타펠슈피츠, 대기 적음","url":""},{"id":"p48","name":"카페 슈페를 / 데멜","city":"빈","kind":"카페","verdict":"선택","note":"슈페를은 월~토 7~22시","url":""},{"id":"p49","name":"국회의사당","city":"부다페스트","kind":"관광","verdict":"필수","note":"사전 예약 필수, 1인 14,000 HUF, 여권","url":"https://www.parlament.hu/web/visitors/ticket-prices"},{"id":"p50","name":"어부의 요새","city":"부다페스트","kind":"관광","verdict":"필수","note":"9시 전 무료. 동향이라 일출 30~45분 전 도착","url":"https://www.chasinghippoz.com/travel-photo-blog/budapest-hungary"},{"id":"p51","name":"도하니 시나고그","city":"부다페스트","kind":"관광","verdict":"추천","note":"토요일 휴관. 가격·12월 시간 재확인","url":""},{"id":"p52","name":"뵈뢰슈머르티·대성당 앞 마켓","city":"부다페스트","kind":"관광","verdict":"추천","note":"뵈뢰슈머르티 11/13~12/31, 대성당 ~1/1, 무료","url":"https://hungaryunlocked.com/budapests-christmas-markets/"},{"id":"p53","name":"레젠다 다뉴브 야경 크루즈","city":"부다페스트","kind":"체험","verdict":"추천","note":"1시간, 음료 1잔, 약 US$29","url":"https://www.viator.com/tours/Budapest/Legenda-Danube-Legend-Cruise-Budapest/d499-35015P1"},{"id":"p54","name":"세체니 온천","city":"부다페스트","kind":"온천","verdict":"추천","note":"평일 13,200 / 금~일 14,800 HUF","url":""},{"id":"p55","name":"루다시 야간 온천","city":"부다페스트","kind":"온천","verdict":"선택","note":"금·토 22~03시, 15,000 HUF, 온라인만","url":""},{"id":"p56","name":"겔레르트 온천","city":"부다페스트","kind":"온천","verdict":"패스","note":"2028년까지 공사로 휴관","url":"https://www.gellertbath.hu/"},{"id":"p57","name":"겔레르트 언덕","city":"부다페스트","kind":"관광","verdict":"선택","note":"일몰부터 야경까지","url":""},{"id":"p58","name":"중앙시장","city":"부다페스트","kind":"관광","verdict":"추천","note":"토 06~15시(출처에 따라 16시), 일요일 휴무","url":"https://en.wikipedia.org/wiki/Great_Market_Hall"},{"id":"p59","name":"시타델라","city":"부다페스트","kind":"관광","verdict":"선택","note":"리뉴얼 후 재개장, 4,900 HUF","url":""},{"id":"p60","name":"보르코냐","city":"부다페스트","kind":"식당","verdict":"기념일","note":"미쉐린 1스타 중 가장 현실적인 가격, 토카이 와인","url":""},{"id":"p61","name":"헝가리쿰 비스트로","city":"부다페스트","kind":"식당","verdict":"필수","note":"국회의사당 근처, 좁아서 예약","url":""},{"id":"p62","name":"스탄드25 비스트로","city":"부다페스트","kind":"식당","verdict":"추천","note":"기술적으로 완벽한 굴라시. 부다 쪽으로 이전","url":""},{"id":"p63","name":"카페 쾨르","city":"부다페스트","kind":"식당","verdict":"선택","note":"전통 헝가리 요리","url":""},{"id":"p64","name":"게토 굴야시","city":"부다페스트","kind":"식당","verdict":"선택","note":"평가가 갈려요","url":""},{"id":"p65","name":"엘레스퇴","city":"부다페스트","kind":"맥주","verdict":"추천","note":"BeerAdvocate 4.29, 호텔에서 걸어갈 거리","url":""},{"id":"p66","name":"그래비티 / 호파홀릭","city":"부다페스트","kind":"맥주","verdict":"추천","note":"수제 맥주 마니아 추천","url":""},{"id":"p67","name":"Csapszék / Monyó","city":"부다페스트","kind":"맥주","verdict":"추천","note":"Csapszék은 라다이 거리 헝가리 크래프트 8탭, Monyó는 칼빈 광장. 호텔 근처","url":"https://www.reddit.com/r/budapest/comments/1f1mc55/craft_beer_in_budapest/"},{"id":"p68","name":"바치 거리 식당","city":"부다페스트","kind":"식당","verdict":"패스","note":"30~60% 비싸고 봉사료·빵 값 추가","url":""}],"tours":[{"id":"t1","name":"KKday 프라하밴투어 (한국인 가이드)","cat":"한국 플랫폼","pick":"1순위","city":"할슈타트","leg":"15일 프라하→체스키→고사우→할슈타트(→빈)","price":"₩399,176 (1인 기준으로 보임, 확인 필요)","drop":"가능, FAQ에 명시 (사전 요청)","ko":"한국인 가이드","rating":"★4.8 (54)","cancel":"30일 전 무료, 29~20일 10%, 19~6일 50%, 5일 이내 불가","note":"짐 규정은 미확인. 2인, 큰 캐리어 2개, 할슈타트 숙소 앞 하차를 메시지로 확약받기","url":"https://www.kkday.com/ko/product/546626"},{"id":"t2","name":"마이리얼트립 #3427309","cat":"한국 플랫폼","pick":"대안","city":"할슈타트","leg":"15일 프라하→체스키→할슈타트","price":"2인 약 72만 원~","drop":"페이지에 없음, 문의 필수","ko":"한국어 가이드","rating":"★4.9 (366)","cancel":"30일 전까지 전액 환불","note":"2인 즉시 확정. 캐리어 1인 30인치 이하 1개. 하차 OK 답을 받으면 1순위와 같은 급","url":"https://experiences.myrealtrip.com/products/3427309"},{"id":"t3","name":"Daytrip 프라이빗 차량 (프라하→할슈타트)","cat":"글로벌 플랫폼","pick":"대안","city":"할슈타트","leg":"15일, 체스키 2시간 정차 선택","price":"1인 US$87~ (2인 약 $174~) + 정차비","drop":"숙소 앞 하차 (도어투도어)","ko":"영어 기사","rating":"Tripadvisor 5.0 (5,314)","cancel":"24시간 전까지 무료","note":"짐 걱정이 가장 적어요. 체스키 가이드는 없음","url":"https://daytrip.com/landing/prague-to-hallstatt"},{"id":"t4","name":"테이스트 프라하 조인 투어","cat":"현지 업체","pick":"대안","city":"할슈타트","leg":"15일, 05:20~06:00 호텔 픽업","price":"2인 €480","drop":"체스키 또는 할슈타트 하차 가능","ko":"미확인","rating":"후기 4개","cancel":"미확인","note":"하차는 확실하지만 후기가 적어요","url":"https://www.tastepraha.com/tour/krumlov-hallstatt-salzburg-1"},{"id":"t5","name":"마이리얼트립 #3887593 개인 차량","cat":"한국 플랫폼","pick":"대안","city":"할슈타트","leg":"15일, 07:00 출발, 체스키 2시간","price":"₩343,200 기준 (1인/차량 불명확)","drop":"개인 차량이라 가능성 높음 (미확인)","ko":"한국인 기사 겸 가이드","rating":"","cancel":"","note":"'짐 개수·크기 문제로 당일 진행 불가' 문구 있음","url":"https://experiences.myrealtrip.com/products/3887593"},{"id":"t6","name":"twoon travel 체스키·고사우·할슈타트","cat":"한국 플랫폼","pick":"참고","city":"할슈타트","leg":"15일 조인 투어","price":"240,000원 기준 (정확한 가격 미확인)","drop":"중간 하차 가능","ko":"한국어","rating":"미확인","cancel":"30일 전 무료, 이후 20~50%, 3일 이내 불가","note":"캐리어 1인 1개, 30인치 미만만","url":"https://experiences.myrealtrip.com/products/4173580"},{"id":"t7","name":"해피트립 [2인확정] 프라하–체스키–할슈타트","cat":"한인 투어사","pick":"참고","city":"할슈타트","leg":"15일, 잘츠부르크까지","price":"₩285,000~","drop":"명시 없음, 문의","ko":"한국인 가이드","rating":"★5.0 (4)","cancel":"30일 전 무료, 당일 50%","note":"짐 제한 없음, 도어투도어","url":"https://www.waug.com/ko/activities/143391"},{"id":"t8","name":"WAUG 프라하–체스키–할슈타트–비엔나","cat":"한국 플랫폼","pick":"참고","city":"할슈타트","leg":"15일, 비엔나 도착","price":"₩374,400~","drop":"미확인","ko":"한국인 가이드","rating":"★5.0 (8)","cancel":"3일 전부터 불가","note":"","url":"https://www.waug.com/ko/activities/144095"},{"id":"t9","name":"블랙드라이버투어 (어나더클래스)","cat":"한국 플랫폼","pick":"참고","city":"할슈타트","leg":"15일, 잘츠·비엔나 하차","price":"320,000원","drop":"미확인","ko":"한국어","rating":"★5 (2,248)","cancel":"","note":"마이리얼트립에서 검색. 할슈타트 하차와 짐 공간 문의","url":""},{"id":"t10","name":"Daytrip 할슈타트→빈 (16일)","cat":"글로벌 플랫폼","pick":"참고","city":"빈","leg":"16일 짐째 이동, 약 3시간 30분","price":"1인 US$87~","drop":"숙소 앞 출발","ko":"영어 기사","rating":"","cancel":"24시간 전까지 무료","note":"07:00 배가 없어지면 쓸 만한 대안. 빈 중앙역 앞 하차 요청","url":"https://daytrip.com/en/transfers/hallstatt-at/vienna-at"},{"id":"t11","name":"마이리얼트립 #3521473","cat":"한국 플랫폼","pick":"비추천","city":"할슈타트","leg":"15일 조인","price":"약 64만 원~ (2인)","drop":"미확인","ko":"한국어","rating":"","cancel":"출발 3일 전부터 환불 불가","note":"최소 4명 필요","url":"https://experiences.myrealtrip.com/products/3521473"},{"id":"t12","name":"CK·Bean Shuttle 합승 셔틀","cat":"현지 업체","pick":"비추천","city":"할슈타트","leg":"15일 09:00 출발","price":"약 4,400 CZK (예전 가격)","drop":"정류장 하차","ko":"없음","rating":"","cancel":"","note":"해 진 뒤 도착해요","url":"https://www.beanshuttle.com/kr/kr-transfers/prague-to-hallstatt/"},{"id":"t13","name":"유로트래블 부다페스트 공항 픽업·샌딩","cat":"한인 투어사","pick":"참고","city":"부다페스트","leg":"19일 공항 샌딩","price":"2인 기준 1인 49,000원","drop":"","ko":"한국인 기사","rating":"","cancel":"","note":"9인승 밴, 캐리어 여러 개 OK","url":"https://www.waug.com/ko/activities/137747"},{"id":"t14","name":"부다페스트 한국어 야경 투어","cat":"한국 플랫폼","pick":"참고","city":"부다페스트","leg":"16~19일 저녁","price":"차량 ₩44,650~ (+현장 €10), 워킹 ₩33,250~","drop":"","ko":"한국어 공인 가이드","rating":"","cancel":"","note":"","url":"https://www.waug.com/rentalcar/activities/106358"},{"id":"t15","name":"세체니 온천 + 다뉴브 디너 크루즈","cat":"글로벌 플랫폼","pick":"참고","city":"부다페스트","leg":"온천과 크루즈 묶음","price":"£116~127","drop":"","ko":"","rating":"★4.5 (638)","cancel":"무료 취소","note":"따로 사는 것과 비교해 보기","url":"https://www.hellotickets.com/hungary/budapest/szechenyi-spa-tickets-dinner-cruise/a/pa-7616"},{"id":"t16","name":"WAUG 드레스덴 당일 투어","cat":"한국 플랫폼","pick":"참고","city":"드레스덴","leg":"14일","price":"와이너리 단독 ₩149,000 (일반 투어 미확인)","drop":"","ko":"한국어","rating":"","cancel":"","note":"기차로 혼자 가도 충분해서 참고만","url":"https://www.waug.com/ko/activities/140465"},{"id":"t17","name":"Prague Beer Tours & Tastings","cat":"현지 업체","pick":"참고","city":"프라하","leg":"90분 맥주 투어","price":"US$35","drop":"","ko":"영어","rating":"9.4/10","cancel":"","note":"맥주 좋아하는 두 분께. 첫날 저녁 대안","url":""},{"id":"t18","name":"허니문 세미팩 체코·비엔나·부다페스트 7박 9일","cat":"허니문 패키지","pick":"참고","city":"공통","leg":"비교용 (12/14 출발, 대한항공)","price":"1인 4,835,000원 (2인 967만 원)","drop":"","ko":"","rating":"","cancel":"","note":"주관 여행사 미확인 (트립스토어 중개). 예산 탭 비교 참고","url":"https://www.tripstore.kr/packages/eastern-europe/honeymoon"},{"id":"t19","name":"V.I.P 허니문 체코투어 (벤츠 기사 + 스냅)","cat":"허니문 패키지","pick":"참고","city":"프라하","leg":"프라하·체스키·드레스덴 4박 5일","price":"3,735,000원~","drop":"","ko":"미확인","rating":"","cancel":"","note":"스냅 촬영이 필요하면 참고","url":"https://experiences.myrealtrip.com/products/3851274"}],"tips":[{"id":"y1","src":"유튜브","city":"할슈타트","title":"할슈타트 브이로그, 겨울왕국 분위기","body":"눈 덮인 할슈타트를 미리 보기 좋아요","url":"https://www.youtube.com/watch?v=tMzsZ7nb0WY"},{"id":"y2","src":"유튜브","city":"할슈타트","title":"엄마와 10일간의 겨울유럽여행 [할슈타트편]","body":"겨울 할슈타트 동선 참고","url":"https://www.youtube.com/watch?v=SMi9UEb1gwo"},{"id":"y3","src":"유튜브","city":"빈","title":"1월 동유럽 브이로그, 비엔나와 할슈타트","body":"한겨울 비엔나·할슈타트를 묶은 루트라 이번 일정과 비슷해요","url":"https://www.youtube.com/watch?v=W4UjMG7dJms"},{"id":"y4","src":"유튜브","city":"체스키크룸로프","title":"Winter Vibes in Prague & Cesky Krumlov","body":"12월~1월에 찍은 프라하·체스키 겨울 풍경","url":"https://www.youtube.com/watch?v=mfT8_vsZUus"},{"id":"y5","src":"유튜브","city":"프라하","title":"12월의 프라하, 크리스마스 마켓과 야경","body":"설명란에 드레스덴 마켓 편 링크도 있어요","url":"https://www.youtube.com/watch?v=6kt9SUln8WY"},{"id":"y6","src":"유튜브","city":"부다페스트","title":"12월 부다페스트, 야경과 마켓","body":"크루즈, 크리스마스 마켓, 로컬 쇼핑","url":"https://www.youtube.com/watch?v=-Xx1HJDsN7M"},{"id":"y7","src":"유튜브","city":"공통","title":"크리스마스 마켓 보러 떠난 동유럽 3개국","body":"12월 초중순 체코·오스트리아·헝가리. 날짜가 거의 같아요","url":"https://www.youtube.com/watch?v=731L-El9MF4"},{"id":"i1","src":"인스타그램","city":"할슈타트","title":"엽서 뷰포인트는 블루아워에","body":"겨울엔 7:00~8:30, 해 뜨기 전에 자리 잡기. 오후 빛이 낫다는 반대 의견도 있어 15일 오후와 16일 새벽 둘 다 가능","url":"https://www.nomadepicureans.com/europe/austria/hallstatt-photography-guide-2026-sunrise-sunset-map/"},{"id":"i2","src":"인스타그램","city":"할슈타트","title":"Müllerstiege 계단 숨은 스팟","body":"구글맵에 apartment Müllerstiege 검색 후 계단으로","url":"https://www.instagram.com/reel/DRtuaQmgrW4/"},{"id":"i3","src":"인스타그램","city":"할슈타트","title":"1박해야 찍는 저녁·새벽 반영샷","body":"당일 투어객이 빠진 뒤 조명 반영샷, 새벽 안개 호수","url":"https://www.instagram.com/reel/DSvPM_LEjgO/"},{"id":"i4","src":"인스타그램","city":"프라하","title":"카를교 16시 가스등 점등","body":"12월 매일 오후 4시쯤 점등 퍼포먼스. 한산한 사진은 해 뜰 무렵","url":"https://www.instagram.com/p/DSSY_2KjddI/"},{"id":"i5","src":"인스타그램","city":"부다페스트","title":"국회의사당 블루아워는 부다 쪽 강변","body":"일몰 30분 뒤가 가장 예뻐요. 어부의 요새는 일출 30~45분 전","url":"https://www.instagram.com/p/DETIAuqA_s4/"},{"id":"b1","src":"블로그","city":"할슈타트","title":"할슈타트는 저녁 8시면 문 닫아요","body":"저녁 식사, 맥주, 마트 장보기는 미리","url":"https://ddingbo.tistory.com/148"},{"id":"b2","src":"블로그","city":"할슈타트","title":"페리는 현금만, 비수기 운휴 가능","body":"마지막 배 18:50 무렵. 점검으로 쉬면 버스·택시로. 새벽 배는 평일만","url":"https://m.blog.naver.com/sengildong/223309495027"},{"id":"b3","src":"블로그","city":"체스키크룸로프","title":"체스키는 망토 다리 → 성탑 순서로","body":"사진은 10~14시, 16시면 거의 밤. 눈 오면 산책로가 미끄러워요","url":"https://blog.naver.com/PostView.naver?blogId=hj332018&logNo=224436383234&redirect=Dlog"},{"id":"b4","src":"블로그","city":"할슈타트","title":"조인 투어 체류 시간 실제 예시","body":"체스키 약 1시간, 고사우 40~45분, 할슈타트 자유시간 약 2시간 30분","url":"https://blog.naver.com/binbin_bbb/223586336751"},{"id":"b5","src":"블로그","city":"드레스덴","title":"드레스덴 마켓은 크로이츠 교회 전망대에서","body":"글뤼바인 머그는 보증금제, 현금 전용 가게 많음, 기차 지연 잦음","url":"https://m.blog.naver.com/alswn0692/223679276561"},{"id":"b6","src":"블로그","city":"빈","title":"빈 중앙역 사물함은 동전 필수","body":"지하 1층, 크기 5종 €2~4.5. 동전이 없으면 Radical Storage(€5/일)","url":"https://m.blog.naver.com/hn8416/223074113650"},{"id":"c1","src":"커뮤니티","city":"프라하","title":"구시가지 펍 추천 (Reddit)","body":"우 즐라테호 티그라는 현금만, 일찍. 우 체르네호 볼라, 우 메드비드쿠, 우 핑카수도 추천. 우 플레쿠 '무료 샷'은 유료","url":"https://www.reddit.com/r/Prague/comments/1r5b0dc/mustvisit_pubs_in_pragues_old_town/"},{"id":"c2","src":"커뮤니티","city":"부다페스트","title":"부다페스트 크래프트 맥주 (Reddit)","body":"Csapszék, 엘레스퇴, Monyó, 그래비티, Beerselection","url":"https://www.reddit.com/r/budapest/comments/1f1mc55/craft_beer_in_budapest/"},{"id":"c3","src":"커뮤니티","city":"할슈타트","title":"12월 할슈타트는 1박이 정답 (Reddit)","body":"당일 투어가 떠난 뒤가 좋고, 12월엔 산 때문에 해가 거의 안 든다는 의견","url":"https://www.reddit.com/r/Europetravel/comments/1wro7io/planning_a_trip_to_austria_in_december_and_i_have/"}],"fixes":[{"id":"f1","sev":"수정","title":"드레스덴을 월요일(14일)에 가면 미술관이 닫혀 있어요","body":"츠빙거 고전회화관은 화~일 10~17시, 월요일 휴관입니다. 보고서는 '월요일 일부 휴관 미확인'으로 남겨 뒀어요.\n방법 1: 13일(일)에 드레스덴, 14일(월)에 프라하 성 (프라하 성은 월요일도 개방).\n방법 2: 마켓과 외관만 볼 거면 그대로 두기.","url":"https://www.dresden.de/de/tourismus/sehen/museen-kunst-und-kultur.php"},{"id":"f2","sev":"수정","title":"귀국편 정보가 세 군데에서 달라요","body":"노션 메모: 터키항공 12/19 14:00 출발.\n노션 지출표: 19:30 출발, 14:10 도착, 3,555,600원.\n보고서: KE964 19:30.\n실제 e-티켓 기준으로 하나로 맞추고, 19일 공항 출발 시각도 다시 잡으세요.","url":""},{"id":"f3","sev":"수정","title":"15일 투어 1순위를 다시 보세요","body":"보고서 1순위(마이리얼트립 #3427309)는 할슈타트 하차가 페이지에 없어요. KKday 프라하밴투어(546626)는 FAQ에 '할슈타트 하차 가능, 사전 요청'이 적혀 있고 한국인 가이드, ★4.8(54)입니다. 두 곳 모두 메시지로 하차·짐을 물어보고 먼저 확약해 주는 쪽으로 정하세요.","url":"https://www.kkday.com/ko/product/546626"},{"id":"f4","sev":"보완","title":"16일 07:00 배가 없으면 차량 이동도 후보로","body":"새벽 배는 평일·학교 수업일만 운항하고, 12/13 새 시간표는 아직 미공개입니다. 배가 없으면 Daytrip 할슈타트→빈 프라이빗(1인 US$87~, 약 3시간 30분, 숙소 앞 출발)이 캐리어 문제까지 해결해 줘요. 열차(1인 약 €35~60)보다 비싸지만 환승이 없어요.","url":"https://daytrip.com/en/transfers/hallstatt-at/vienna-at"},{"id":"f5","sev":"보완","title":"프라하 숙소 이름과 새벽 체크아웃을 넣으세요","body":"노션 기준 프라하 숙소는 유니타스 호텔(Na Perštýně 344/5, 12/12~15 3박)인데 보고서에 빠져 있어요. 15일 05:00 픽업이라 전날 정산, 열쇠 반납, 조식 박스를 호텔에 미리 알려야 합니다. 노션 일정표 12/14~15 행 숙소칸도 비어 있어요.","url":""},{"id":"f6","sev":"보완","title":"할슈타트 숙소 이름과 위치를 다시 확인하세요","body":"보고서는 'Hallstatt Hideaway'로 가정했지만 노션에는 주소(Dr.-Friedrich-Morton-Weg 24)와 야놀자 링크만 있어요. 좌표상 마르크트 광장 남서쪽 약 150m라 언덕·계단길일 수 있으니 캐리어 동선을 숙소에 물어보세요.","url":""},{"id":"f7","sev":"보완","title":"지출표에 유로(EUR) 열이 없어요","body":"할슈타트·빈·드레스덴은 유로를 씁니다. 노션 신혼여행 지출표에 '유로', '환율(유로)', '원화(유로)' 열을 추가하세요. 여행지 선택지도 '체코/프라하', '헝가리/부다페스트'가 겹쳐서 도시 단위로 정리하면 보기 쉬워요.","url":""},{"id":"f8","sev":"보완","title":"할슈타트 저녁은 20시 전에 끝내야 해요","body":"블로그 후기 기준 웬만한 가게가 오후 8시에 닫아요. 15일 저녁 17:30 예약과 함께 마트 장보기(맥주 포함)를 일정에 넣었어요.","url":"https://ddingbo.tistory.com/148"},{"id":"f9","sev":"보완","title":"현금이 꼭 필요한 곳을 정리했어요","body":"할슈타트 페리(유로 현금), 빈 중앙역 사물함(유로 동전), 우 즐라테호 티그라(코루나 현금), 드레스덴 마켓 일부 가게. 소액 현금을 따로 준비하세요.","url":""},{"id":"f10","sev":"보완","title":"허니문 패키지와 비교하면 자유여행이 유리해요","body":"비슷한 동선의 허니문 세미팩 7박 9일은 1인 4,835,000원, 2인 967만 원입니다. 지금 계획은 결제 완료 약 703만 원에 예상 비용 약 170만 원을 더해 약 873만 원이라, 식비를 빼고 단순 비교해도 90만 원 정도 아끼면서 일정도 자유로워요.","url":"https://www.tripstore.kr/packages/eastern-europe/honeymoon"},{"id":"f11","sev":"확인","title":"스카이워크와 체스키 성탑은 열려 있어요","body":"스카이워크 푸니쿨라는 11/2~1/6 운영, 9:00~16:30, 휴무는 12/24·31뿐입니다. 체스키 성탑은 12/20까지 화~일이라 15일(화) 방문이 가능해요. 보고서 내용 그대로 가도 됩니다.","url":"https://www.salzwelten.at/en/hallstatt/prices-opening-hours"},{"id":"f12","sev":"확인","title":"부다페스트 중앙시장은 토요일 오후 3시경 닫아요","body":"보고서에서 '미확인'이던 부분입니다. 대부분 출처가 토요일 06~15시(일부 16시)라 19일 오전 방문은 괜찮아요.","url":"https://en.wikipedia.org/wiki/Great_Market_Hall"},{"id":"f13","sev":"확인","title":"크리스마스 마켓 날짜는 모두 일정 안에 있어요","body":"프라하 구시가지 11/28경~1/6, 드레스덴 11/25~12/24, 빈 시청 광장 ~12/26, 부다페스트 뵈뢰슈머르티 11/13~12/31. 할슈타트 마켓만 12/8 하루라 이번엔 없어요.","url":"https://www.vienna-unwrapped.com/vienna-christmas-market/"}],"budget":[{"id":"m1","name":"항공 (프라하 IN, 카타르항공)","cat":"항공","status":"결제완료","krw":1515000,"note":"노션 지출표"},{"id":"m2","name":"항공 (부다페스트 OUT)","cat":"항공","status":"결제완료","krw":3555600,"note":"노션 지출표, 편명 확인 필요"},{"id":"m3","name":"프라하 유니타스 호텔 3박","cat":"숙소","status":"결제완료","krw":793367,"note":"노션 지출표"},{"id":"m4","name":"부다페스트 실버 크라운 3박","cat":"숙소","status":"결제완료","krw":702125,"note":"노션 지출표"},{"id":"m5","name":"할슈타트 숙소 1박","cat":"숙소","status":"결제완료","krw":460000,"note":"노션 지출표"},{"id":"m6","name":"15일 투어 2인","cat":"투어·입장","status":"예상","krw":760000,"note":"KKday 약 79.8만 / 마이리얼트립 72만~"},{"id":"m7","name":"할슈타트→빈→부다페스트 교통 2인","cat":"교통","status":"예상","krw":256000,"note":"약 €160 가정"},{"id":"m8","name":"프라하↔드레스덴 열차 2인 왕복","cat":"교통","status":"예상","krw":96000,"note":"약 €60"},{"id":"m9","name":"스카이워크 푸니쿨라 2인","cat":"투어·입장","status":"예상","krw":92800,"note":"€58"},{"id":"m10","name":"프라하 성 2인","cat":"투어·입장","status":"예상","krw":63600,"note":"900 CZK"},{"id":"m11","name":"벨베데레 + 사물함","cat":"투어·입장","status":"예상","krw":88000,"note":"약 €55"},{"id":"m12","name":"국회의사당 2인","cat":"투어·입장","status":"예상","krw":126000,"note":"28,000 HUF"},{"id":"m13","name":"세체니 온천 2인 (금)","cat":"투어·입장","status":"예상","krw":133200,"note":"29,600 HUF"},{"id":"m14","name":"레젠다 크루즈 2인","cat":"투어·입장","status":"예상","krw":80000,"note":"약 US$58"}]}</script>
+<script id="gjs">
+(function(){
+"use strict";
+var $=function(s,r){return (r||document).querySelector(s)};
+var esc=function(s){return String(s==null?"":s).replace(/[&<>"']/g,function(c){return {"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]})};
+var safeUrl=function(u){return /^https?:\/\//i.test(u||"")?u:""};
+var clone=function(o){return JSON.parse(JSON.stringify(o))};
+var BASE=JSON.parse(document.getElementById("trip-data").textContent);
+var S=clone(BASE);
+var dirty=0,editMode=false,tab="days",q="",city="",kindF="",pendingDel=null;
+var art=null,canWrite=true;
+var LS="hm-guide-draft";
+var RESET=":root{color-scheme:light;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}body{margin:0;font:14px/1.4 system-ui,-apple-system,sans-serif}img{max-width:100%}[hidden]{display:none!important}";
+var FONT_LINK='<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Gowun+Batang:wght@700&family=Noto+Sans+KR:wght@400;500;600;700&display=swap">';
+var IMG=/*IMG*/{"hero": "/_blob/58cc936709328817554e71b875488582", "프라하": "/_blob/bc9d2be5cf825d1f2b8173557d6a405e", "드레스덴": "/_blob/637aa84f66df5b854ac3e4fd276c1481", "체스키크룸로프": "/_blob/ef4694d9a507aa09d32da44cc8dd0f4c", "할슈타트": "/_blob/f883dcac5291f77fc09f37259a0e4f40", "빈": "/_blob/b9739d253967a6b65df6fb80f65a483b", "부다페스트": "/_blob/707a92d38ce76ae34d62a996bb5a1274", "공통": "/_blob/58cc936709328817554e71b875488582"};
+
+var CITIES=["프라하","드레스덴","체스키크룸로프","할슈타트","빈","부다페스트"];
+var CCOL={"프라하":"#d93a62","드레스덴":"#8a63d2","체스키크룸로프":"#2e86de","할슈타트":"#15a39c","빈":"#d99a12","부다페스트":"#26875a","공통":"#5a6799"};
+var NODES=[
+  {city:"프라하",label:"프라하",date:"12.12–14",fx:.08},
+  {city:"드레스덴",label:"드레스덴",date:"12.14 당일",fx:.235},
+  {city:"체스키크룸로프",label:"체스키",date:"12.15 오전",fx:.39},
+  {city:"할슈타트",label:"할슈타트",date:"12.15 1박",fx:.55},
+  {city:"빈",label:"빈",date:"12.16 경유",fx:.72},
+  {city:"부다페스트",label:"부다페스트",date:"12.16–19",fx:.9}
+];
+var TABS=[
+  {k:"days",l:"일정"},{k:"quests",l:"예약 퀘스트"},{k:"places",l:"장소·맛집"},{k:"tours",l:"투어·여행사"},
+  {k:"tips",l:"현지 꿀팁"},{k:"fixes",l:"보고서 점검"},{k:"budget",l:"예산"}
+];
+var SEL_CITY=CITIES.concat(["공통"]);
+var SCHEMA={
+  days:[{k:"date",l:"날짜",t:"date"},{k:"city",l:"도시",t:"select",o:SEL_CITY},{k:"title",l:"제목",t:"text"},{k:"stay",l:"숙소",t:"text"},{k:"alert",l:"주의 메모",t:"text"},{k:"items",l:"시간표 (한 줄에 하나씩, 시각 | 내용)",t:"lines"}],
+  quests:[{k:"text",l:"할 일",t:"text"},{k:"due",l:"마감일",t:"date"},{k:"prio",l:"중요도",t:"select",o:["긴급","보통","선택"]},{k:"note",l:"메모",t:"textarea"},{k:"url",l:"링크",t:"url"}],
+  places:[{k:"name",l:"이름",t:"text"},{k:"city",l:"도시",t:"select",o:SEL_CITY},{k:"kind",l:"종류",t:"select",o:["관광","식당","맥주","카페","온천","체험","교통"]},{k:"verdict",l:"판정",t:"select",o:["필수","추천","선택","기념일","패스"]},{k:"note",l:"메모",t:"textarea"},{k:"url",l:"링크",t:"url"}],
+  tours:[{k:"name",l:"업체·상품",t:"text"},{k:"cat",l:"분류",t:"select",o:["한국 플랫폼","한인 투어사","글로벌 플랫폼","현지 업체","허니문 패키지"]},{k:"pick",l:"판정",t:"select",o:["1순위","대안","참고","비추천"]},{k:"city",l:"도시",t:"select",o:SEL_CITY},{k:"leg",l:"구간·용도",t:"text"},{k:"price",l:"가격",t:"text"},{k:"drop",l:"할슈타트 하차",t:"text"},{k:"ko",l:"한국어",t:"text"},{k:"rating",l:"평점·후기",t:"text"},{k:"cancel",l:"취소 규정",t:"text"},{k:"note",l:"메모",t:"textarea"},{k:"url",l:"링크",t:"url"}],
+  tips:[{k:"src",l:"출처 종류",t:"select",o:["유튜브","인스타그램","블로그","커뮤니티"]},{k:"city",l:"도시",t:"select",o:SEL_CITY},{k:"title",l:"제목",t:"text"},{k:"body",l:"내용",t:"textarea"},{k:"url",l:"링크",t:"url"}],
+  fixes:[{k:"sev",l:"구분",t:"select",o:["수정","보완","확인"]},{k:"title",l:"제목",t:"text"},{k:"body",l:"내용",t:"textarea"},{k:"url",l:"근거 링크",t:"url"}],
+  budget:[{k:"name",l:"항목",t:"text"},{k:"cat",l:"분류",t:"select",o:["항공","숙소","교통","투어·입장","식사","기타"]},{k:"status",l:"상태",t:"select",o:["결제완료","예상"]},{k:"krw",l:"금액(원)",t:"number"},{k:"note",l:"메모",t:"text"}]
+};
+var DOW=["일","월","화","수","목","금","토"];
+
+function lsGet(){try{return JSON.parse(localStorage.getItem(LS)||"null")}catch(e){return null}}
+function lsSet(v){try{if(v)localStorage.setItem(LS,JSON.stringify(v));else localStorage.removeItem(LS)}catch(e){}}
+var draft=lsGet();
+if(draft&&draft.pending&&draft.pending===S.meta.updated){lsSet(null);draft=null}
+var showDraftBanner=!!(draft&&draft.state&&draft.n>0);
+
+S.checks=S.checks||{};
+var curDay="",dayEnter=true;
+function dowOf(s){var d=parseD(s);return d?DOW[d.getDay()]:""}
+function dayStat(d){var n=(d.items||[]).length,done=0,next=-1;(d.items||[]).forEach(function(_,j){if(S.checks[d.id+":"+j])done++;else if(next<0)next=j});return {n:n,done:done,next:next}}
+function pickDay(L){
+  // 여행 중이면 오늘, 출발 전이면 첫 관광일(12일), 다녀온 뒤면 마지막 날
+  var t=today(),hit=L.find(function(d){var x=parseD(d.date);return x&&x.getTime()===t.getTime()});
+  if(hit)return hit.id;
+  var first=L.find(function(d){return d.date>=S.meta.start})||L[0];
+  var last=L[L.length-1];
+  return parseD(last.date)<t?last.id:first.id;
+}
+function today(){var d=new Date();return new Date(d.getFullYear(),d.getMonth(),d.getDate())}
+function parseD(s){var m=/^(\d{4})-(\d{2})-(\d{2})/.exec(s||"");return m?new Date(+m[1],+m[2]-1,+m[3]):null}
+function dDiff(s){var d=parseD(s);return d?Math.round((d-today())/864e5):null}
+function fmtMD(s){var d=parseD(s);return d?(d.getMonth()+1)+"."+String(d.getDate()).padStart(2,"0"):""}
+function won(n){return (Math.round(+n||0)).toLocaleString("ko-KR")+"원"}
+function uid(){return Math.random().toString(36).slice(2,9)}
+function hay(o){return JSON.stringify(o).toLowerCase()}
+function match(o){
+  if(q&&hay(o).indexOf(q)<0)return false;
+  if(city&&(tab!=="budget"&&tab!=="fixes"&&tab!=="quests")){var c=o.city||"";if(c!==city&&hay(o).indexOf(city.toLowerCase())<0)return false}
+  return true;
+}
+function countFor(k){var list=S[k]||[];var saved=tab;tab=k;var n=list.filter(match).length;tab=saved;return n}
+
+/* ---------- 렌더 ---------- */
+function render(){
+  var app=$("#app");
+  var scrollY=window.scrollY;
+  var dd=dDiff(S.meta.start);
+  var qs=S.quests||[],done=qs.filter(function(x){return x.done}).length;
+  var paid=(S.budget||[]).filter(function(b){return b.status==="결제완료"}).reduce(function(a,b){return a+(+b.krw||0)},0);
+  var next=qs.filter(function(x){return !x.done&&x.due}).sort(function(a,b){return a.due<b.due?-1:1})[0];
+  var h="";
+  h+='<header class="hero" style="--hero:url(\''+IMG.hero+'\')"><canvas id="cv" aria-hidden="true"></canvas><div class="wrap hero-in">';
+  h+='<span class="hero-date">2026년 12월 12일부터 8박 9일 <b>'+(dd==null?"":dd>0?"D-"+dd:dd===0?"오늘 출발":"여행 중")+'</b></span>';
+  h+='<h1>'+esc(S.meta.title)+'</h1><p class="hero-sub">'+esc(S.meta.sub)+'</p>';
+  h+='<ol class="route" aria-label="여행 경로">';
+  NODES.forEach(function(n){h+='<li><button type="button" data-city="'+esc(n.city)+'" aria-pressed="'+(city===n.city)+'">'+esc(n.label)+'<small>'+esc(n.date)+'</small></button></li>'});
+  h+='</ol></div><span class="ai-note">사진은 AI로 만든 이미지예요</span></header>';
+  h+='<main class="wrap">';
+  h+='<div class="searchrow"><div class="search"><label for="q">검색<input id="q" type="search" placeholder="장소, 식당, 업체, 메모까지 한 번에" value="'+esc(q)+'"></label><span class="orb" aria-hidden="true"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="3" stroke-linecap="round"><circle cx="10.5" cy="10.5" r="6.5"/><path d="M15.5 15.5 21 21"/></svg></span></div>';
+  h+='<button class="btn edit-toggle '+(editMode?"red":"ghost")+'" type="button" data-act="edit" aria-pressed="'+editMode+'">'+(editMode?"편집 끝내기":"편집하기")+'</button></div>';
+  h+='<div class="cities" role="group" aria-label="도시별로 보기"><button class="city" type="button" data-city="" aria-pressed="'+(city==="")+'"><span class="ph all"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#222" stroke-width="1.8" aria-hidden="true"><path d="M3 6l6-3 6 3 6-3v15l-6 3-6-3-6 3z"/><path d="M9 3v15M15 6v15"/></svg></span>전체</button>';
+  CITIES.forEach(function(c){h+='<button class="city" type="button" data-city="'+esc(c)+'" aria-pressed="'+(city===c)+'"><span class="ph" style="--img:url(\''+(IMG[c]||IMG.hero)+'\')"></span>'+esc(c==="체스키크룸로프"?"체스키":c)+'</button>'});
+  h+='</div>';
+  if(showDraftBanner){h+='<div class="banner" role="status"><span>이 브라우저에 저장하지 않은 수정 '+draft.n+'건이 남아 있어요.</span><button class="btn sm" data-act="draft-load" type="button">수정본 불러오기</button><button class="btn sm ghost" data-act="draft-drop" type="button">버리기</button></div>'}
+  h+='<section class="status" aria-label="한눈에 보기">';
+  h+='<div class="stat"><b>'+(dd==null?"-":dd>0?"D-"+dd:"D-day")+'</b><span>12월 12일 00:20 인천 출발</span></div>';
+  h+='<div class="stat"><b>'+done+' / '+qs.length+'</b><span>예약 퀘스트 완료</span><div class="bar"><i style="width:'+(qs.length?done/qs.length*100:0)+'%"></i></div></div>';
+  h+='<div class="stat"><b>'+won(paid)+'</b><span>결제한 금액 (노션 지출표)</span></div>';
+  h+='<div class="stat next"><b>'+(next?esc(next.text):"남은 퀘스트 없음")+'</b><span>'+(next?"다음 마감 "+fmtMD(next.due)+dueWord(next.due):"모두 끝냈어요")+'</span></div>';
+  h+='</section>';
+  h+='<nav class="tabs" role="tablist" aria-label="섹션">';
+  TABS.forEach(function(t){var n=(q||city)?countFor(t.k):0;h+='<button class="tab" role="tab" type="button" data-tab="'+t.k+'" aria-selected="'+(tab===t.k)+'">'+t.l+((q||city)?'<span class="n">'+n+'</span>':"")+'</button>'});
+  h+='</nav>';
+  h+='<section class="panel" role="tabpanel">'+renderTab()+'</section>';
+  h+='<p class="foot">노션 일정표·신혼여행 지출표와 기존 보고서를 바탕으로 정리했어요. 가격과 운영 시간은 2026년 11월 2일 기준이라 예약 직전에 다시 확인하세요. 마지막 저장: '+esc((S.meta.updated||"").slice(0,16).replace("T"," "))+'</p>';
+  h+='</main>';
+  h+=saveBarHtml();
+  app.innerHTML=h;
+  drawSceneSoon();
+  window.scrollTo(0,scrollY);
+  var strip=$("#ql-days"),sel=strip&&strip.querySelector('[aria-pressed="true"]');
+  if(sel)strip.scrollLeft=sel.offsetLeft-strip.clientWidth/2+sel.offsetWidth/2;
+}
+function refreshSaveBar(){var old=$(".savebar"),html=saveBarHtml();if(old)old.remove();if(html)document.body.insertAdjacentHTML("beforeend",html)}
+function tickStop(b){
+  // 화면 전체를 다시 그리지 않고 이 날만 고쳐서 체크 애니메이션이 살아 있게 한다
+  var d=(S.days||[]).find(function(x){return x.id===curDay});if(!d)return;
+  var k=d.id+":"+b.getAttribute("data-j");
+  if(S.checks[k])delete S.checks[k];else S.checks[k]=1;
+  b.setAttribute("aria-pressed",String(!!S.checks[k]));
+  var st=dayStat(d);
+  document.querySelectorAll(".ql-item").forEach(function(li,x){
+    li.classList.toggle("done",!!S.checks[d.id+":"+x]);li.classList.toggle("next",x===st.next);
+    var t=li.querySelector(".ql-text"),tag=t.querySelector(".ql-next");
+    if(x===st.next&&!tag)t.insertAdjacentHTML("afterbegin",'<span class="ql-next">다음</span>');
+    if(x!==st.next&&tag)tag.remove();
+  });
+  $("#ql-count").textContent=st.done+" / "+st.n+" 완료";
+  $("#ql-bar").style.transform="scaleX("+(st.n?st.done/st.n:0)+")";
+  var db=document.querySelector('.ql-day[aria-pressed="true"]');if(db)db.classList.toggle("done-all",st.n>0&&st.done===st.n);
+  dirty++;lsSet({base:BASE.meta.updated,state:S,n:dirty});refreshSaveBar();
+}
+function dueWord(s){var n=dDiff(s);if(n==null)return "";if(n<0)return " (지남 "+(-n)+"일)";if(n===0)return " (오늘)";return " (D-"+n+")"}
+function editBtns(col,id){
+  if(!editMode)return "";
+  var del=pendingDel===col+":"+id;
+  return '<div class="edit-row"><button class="btn sm ghost" type="button" data-act="open" data-col="'+col+'" data-id="'+esc(id)+'">수정</button><button class="btn sm danger" type="button" data-act="del" data-col="'+col+'" data-id="'+esc(id)+'">'+(del?"한 번 더 누르면 삭제":"삭제")+'</button></div>';
+}
+function addBtn(col,label){return editMode?'<button class="btn" type="button" data-act="open" data-col="'+col+'" data-id="">'+label+'</button>':""}
+function link(u,t){u=safeUrl(u);return u?'<a class="src-link" href="'+esc(u)+'" target="_blank" rel="noopener">'+esc(t||"링크 열기")+'</a>':""}
+function cityDot(c){return c?'<span class="city-dot" style="--img:url(\''+(IMG[c]||IMG.hero)+'\')">'+esc(c)+'</span>':""}
+function empty(msg){return '<div class="empty"><b>찾는 항목이 없어요</b>'+esc(msg||"검색어나 도시 거르기를 바꿔 보세요.")+'</div>'}
+function top(desc,btn){return '<div class="panel-top"><p>'+desc+'</p>'+(btn||"")+'</div>'}
+
+function renderTab(){
+  var L=(S[tab]||[]).filter(match);
+  if(tab==="days"){
+    var h=top("하루씩 넘기며 다녀온 곳을 체크하세요. 체크는 저장하면 둘이 같이 봐요. 노란 메모는 손봐야 할 부분이에요.",addBtn("days","날짜 추가"));
+    if(!L.length)return h+empty();
+    L=L.slice().sort(function(a,b){return a.date<b.date?-1:1});
+    if(!L.some(function(d){return d.id===curDay}))curDay=pickDay(L);
+    var di=L.findIndex(function(d){return d.id===curDay}),d=L[di];
+    h+='<div class="ql-days" id="ql-days" role="group" aria-label="날짜">';
+    L.forEach(function(x){
+      var st=dayStat(x);
+      h+='<button type="button" class="ql-day'+(st.n&&st.done===st.n?" done-all":"")+'" data-act="day" data-id="'+esc(x.id)+'" aria-pressed="'+(x.id===curDay)+'" style="--c:'+(CCOL[x.city]||CCOL["공통"])+'"><b>'+fmtMD(x.date)+'</b><span>'+dowOf(x.date)+'요일</span><i></i></button>';
+    });
+    h+='</div>';
+    var st2=dayStat(d);
+    h+='<div class="day-hero" style="--img:url(\''+(IMG[d.city]||IMG.hero)+'\')"><div><div><small>'+fmtMD(d.date)+' '+dowOf(d.date)+'요일, '+esc(d.city)+'</small><h2>'+esc(d.title)+'</h2></div><div class="ql-nav">';
+    h+='<button type="button" class="btn sm" data-act="day" data-id="'+(di>0?esc(L[di-1].id):"")+'"'+(di>0?"":" disabled")+'>전날</button><button type="button" class="btn sm" data-act="day" data-id="'+(di<L.length-1?esc(L[di+1].id):"")+'"'+(di<L.length-1?"":" disabled")+'>다음 날</button></div></div></div>';
+    h+='<div class="ql-meta">'+(d.stay?'<div class="stay">오늘 숙소 <b>'+esc(d.stay)+'</b></div>':'')+(d.alert?'<div class="alert">'+esc(d.alert)+'</div>':'')+'</div>';
+    h+='<div class="ql-prog"><span id="ql-count">'+st2.done+' / '+st2.n+' 완료</span><div class="ql-bar"><i id="ql-bar" style="transform:scaleX('+(st2.n?st2.done/st2.n:0)+')"></i></div></div>';
+    h+='<ol class="ql-list'+(dayEnter?" enter":"")+'">';
+    (d.items||[]).forEach(function(it,j){
+      var on=!!S.checks[d.id+":"+j];
+      h+='<li class="ql-item'+(on?" done":"")+(j===st2.next?" next":"")+'" style="--i:'+j+'"><button type="button" class="ql-check" data-act="ck" data-j="'+j+'" aria-pressed="'+on+'" aria-label="'+esc(it[1])+' 완료"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="4" aria-hidden="true"><path d="M4 12l5 5L20 6"/></svg></button><span class="ql-time">'+esc(it[0])+'</span><span class="ql-text">'+(j===st2.next?'<span class="ql-next">다음</span>':'')+esc(it[1])+'</span></li>';
+    });
+    h+='</ol>';
+    dayEnter=false;
+    return h+editBtns("days",d.id);
+  }
+  if(tab==="quests"){
+    var h2=top("예약·확인해야 할 일을 급한 순서로 모았어요. 체크하면 상단 진행률에 반영되고, 저장하면 둘 다 같은 화면을 봐요.",addBtn("quests","퀘스트 추가"));
+    if(!L.length)return h2+empty();
+    L=L.slice().sort(function(a,b){if(!!a.done!==!!b.done)return a.done?1:-1;return (a.due||"9")<(b.due||"9")?-1:1});
+    h2+='<div class="quests">';
+    L.forEach(function(x){
+      var n=dDiff(x.due);var cls=n==null?"cool":n<=3?"hot":n<=10?"warm":"cool";
+      h2+='<div class="quest'+(x.done?" done":"")+'"><button class="check" type="button" data-act="tick" data-id="'+esc(x.id)+'" aria-pressed="'+!!x.done+'" aria-label="완료 표시"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="4"><path d="M4 12l5 5L20 6"/></svg></button>';
+      h2+='<div style="min-width:0"><div class="meta"><span class="q-text">'+esc(x.text)+'</span><span class="pill prio-'+esc(x.prio)+'">'+esc(x.prio)+'</span></div>';
+      if(x.note)h2+='<div class="q-note">'+esc(x.note)+'</div>';
+      if(x.url)h2+='<div>'+link(x.url,"예약 페이지")+'</div>';
+      h2+=editBtns("quests",x.id)+'</div>';
+      h2+='<div class="due '+(x.done?"cool":cls)+'">'+(x.due?fmtMD(x.due):"")+'<small>'+(x.done?"완료":x.due?dueWord(x.due).replace(/[()]/g,"").trim():"")+'</small></div></div>';
+    });
+    return h2+'</div>';
+  }
+  if(tab==="places"){
+    var kinds=["관광","식당","맥주","카페","온천","체험","교통"];
+    var h3=top("두 분 리스트와 보고서 추천을 판정별로 정리했어요. 패스는 12월에 닫거나 시간 대비 아쉬운 곳이에요.",addBtn("places","장소 추가"));
+    h3+='<div class="kinds" role="group" aria-label="종류 거르기"><button class="chip" type="button" data-kind="" aria-pressed="'+(kindF==="")+'">전체</button>';
+    kinds.forEach(function(k){h3+='<button class="chip" type="button" data-kind="'+k+'" aria-pressed="'+(kindF===k)+'">'+k+'</button>'});
+    h3+='</div>';
+    L=L.filter(function(p){return !kindF||p.kind===kindF});
+    if(!L.length)return h3+empty();
+    var ord={"필수":0,"기념일":1,"추천":2,"선택":3,"패스":4};
+    L=L.slice().sort(function(a,b){var ca=CITIES.indexOf(a.city),cb=CITIES.indexOf(b.city);if(ca!==cb)return ca-cb;return (ord[a.verdict]||9)-(ord[b.verdict]||9)});
+    h3+='<div class="grid">';
+    L.forEach(function(p){
+      h3+='<article class="card"><div class="meta"><span class="pill v-'+esc(p.verdict)+'">'+esc(p.verdict)+'</span><span class="pill" style="color:var(--ink-2)">'+esc(p.kind)+'</span>'+cityDot(p.city)+'</div><h3>'+esc(p.name)+'</h3>';
+      if(p.note)h3+='<p>'+esc(p.note)+'</p>';
+      h3+=link(p.url,"출처 보기")+editBtns("places",p.id)+'</article>';
+    });
+    return h3+'</div>';
+  }
+  if(tab==="tours"){
+    var h4=top("15일 프라하→체스키→할슈타트 구간을 중심으로 한국·글로벌·현지 업체를 비교했어요. 할슈타트에서 내려 주는지가 가장 중요한 기준이에요.",addBtn("tours","업체 추가"));
+    if(!L.length)return h4+empty();
+    var po={"1순위":0,"대안":1,"참고":2,"비추천":3};
+    L=L.slice().sort(function(a,b){return (po[a.pick]||9)-(po[b.pick]||9)});
+    h4+='<div class="grid">';
+    L.forEach(function(t){
+      h4+='<article class="card"><div class="meta"><span class="pill pick-'+esc(t.pick)+'">'+esc(t.pick)+'</span><span class="pill" style="color:var(--ink-2)">'+esc(t.cat)+'</span>'+cityDot(t.city)+'</div><h3>'+esc(t.name)+'</h3><dl class="kv">';
+      [["leg","용도"],["price","가격"],["drop","할슈타트 하차"],["ko","한국어"],["rating","평점"],["cancel","취소"]].forEach(function(f){if(t[f[0]])h4+='<dt>'+f[1]+'</dt><dd>'+esc(t[f[0]])+'</dd>'});
+      h4+='</dl>';
+      if(t.note)h4+='<p>'+esc(t.note)+'</p>';
+      h4+=link(t.url,"상품 페이지")+editBtns("tours",t.id)+'</article>';
+    });
+    return h4+'</div>';
+  }
+  if(tab==="tips"){
+    var h5=top("유튜브, 인스타그램, 블로그, 커뮤니티 후기에서 이번 일정에 바로 쓸 만한 것만 골랐어요.",addBtn("tips","꿀팁 추가"));
+    if(!L.length)return h5+empty();
+    var so={"유튜브":0,"인스타그램":1,"블로그":2,"커뮤니티":3};
+    L=L.slice().sort(function(a,b){return (so[a.src]||9)-(so[b.src]||9)});
+    h5+='<div class="grid">';
+    L.forEach(function(t){
+      h5+='<article class="card"><div class="meta"><span class="pill src-'+esc(t.src)+'">'+esc(t.src)+'</span>'+cityDot(t.city)+'</div><h3>'+esc(t.title)+'</h3>';
+      if(t.body)h5+='<p>'+esc(t.body)+'</p>';
+      h5+=link(t.url,"원문 보기")+editBtns("tips",t.id)+'</article>';
+    });
+    return h5+'</div>';
+  }
+  if(tab==="fixes"){
+    var h6=top("기존 보고서와 노션 자료를 맞대어 보고 고칠 곳, 더할 곳, 다시 확인할 곳을 골랐어요.",addBtn("fixes","점검 항목 추가"));
+    if(!L.length)return h6+empty();
+    var fo={"수정":0,"보완":1,"확인":2};
+    L=L.slice().sort(function(a,b){return (fo[a.sev]||9)-(fo[b.sev]||9)});
+    h6+='<div class="grid">';
+    L.forEach(function(f){
+      h6+='<article class="card"><div class="meta"><span class="pill sev-'+esc(f.sev)+'">'+esc(f.sev)+'</span></div><h3>'+esc(f.title)+'</h3><p class="fix-body">'+esc(f.body)+'</p>'+link(f.url,"근거 보기")+editBtns("fixes",f.id)+'</article>';
+    });
+    return h6+'</div>';
+  }
+  if(tab==="budget"){
+    var all=S.budget||[];
+    var paidT=all.filter(function(b){return b.status==="결제완료"}).reduce(function(a,b){return a+(+b.krw||0)},0);
+    var estT=all.filter(function(b){return b.status!=="결제완료"}).reduce(function(a,b){return a+(+b.krw||0)},0);
+    var h7=top("결제완료는 노션 신혼여행 지출표 금액이고, 예상은 보고서 가격으로 어림한 값이에요. 유로는 1유로 = 1,600원으로 가정했어요.",addBtn("budget","항목 추가"));
+    h7+='<div class="money"><div class="card"><span>결제 완료</span><b>'+won(paidT)+'</b></div><div class="card"><span>앞으로 예상</span><b>'+won(estT)+'</b></div><div class="card"><span>총 예상 경비</span><b>'+won(paidT+estT)+'</b></div></div>';
+    var cats=["항공","숙소","교통","투어·입장","식사","기타"];var max=0;var rows=cats.map(function(c){var p=0,e=0;all.forEach(function(b){if(b.cat===c){if(b.status==="결제완료")p+=+b.krw||0;else e+=+b.krw||0}});max=Math.max(max,p+e);return [c,p,e]}).filter(function(r){return r[1]+r[2]>0});
+    h7+='<div class="legend"><span><i style="background:var(--pine)"></i>결제 완료</span><span><i style="background:var(--gold)"></i>예상</span></div><div class="cat-bars">';
+    rows.forEach(function(r){h7+='<div class="cat-row"><span>'+r[0]+'</span><div class="cat-track"><i style="width:'+(r[1]/max*100)+'%;background:var(--pine)"></i><i style="width:'+(r[2]/max*100)+'%;background:var(--gold)"></i></div><span>'+won(r[1]+r[2])+'</span></div>'});
+    h7+='</div>';
+    if(!L.length)return h7+empty();
+    h7+='<div class="tbl-wrap"><table><thead><tr><th>항목</th><th>분류</th><th>상태</th><th style="text-align:right">금액</th><th>메모</th>'+(editMode?'<th></th>':'')+'</tr></thead><tbody>';
+    L.forEach(function(b){h7+='<tr><td>'+esc(b.name)+'</td><td>'+esc(b.cat)+'</td><td><span class="pill st-'+esc(b.status)+'">'+esc(b.status)+'</span></td><td class="num">'+won(b.krw)+'</td><td>'+esc(b.note)+'</td>'+(editMode?'<td>'+editBtns("budget",b.id)+'</td>':'')+'</tr>'});
+    return h7+'</tbody></table></div>';
+  }
+  return "";
+}
+
+function saveBarHtml(){
+  if(!dirty)return "";
+  var msg=canWrite?"저장하지 않은 수정 "+dirty+"건":"이 화면은 보기 전용이라 수정 "+dirty+"건이 이 브라우저에만 남아요";
+  return '<div class="savebar" role="region" aria-label="저장"><span>'+msg+'</span><button class="btn sm ghost" type="button" data-act="revert">'+(pendingDel==="revert"?"한 번 더 누르면 되돌리기":"되돌리기")+'</button>'+(canWrite?'<button class="btn sm red" type="button" data-act="save">저장하기</button>':'')+'</div>';
+}
+
+/* ---------- 편집 ---------- */
+function markDirty(){dirty++;lsSet({base:BASE.meta.updated,state:S,n:dirty});render()}
+function findIdx(col,id){return (S[col]||[]).findIndex(function(o){return o.id===id})}
+function openForm(col,id){
+  var o=id?S[col][findIdx(col,id)]:{};
+  var f='<div class="modal" id="modal"><div class="win" role="dialog" aria-modal="true" aria-labelledby="mt"><div class="win-h" id="mt">'+(id?"항목 수정":"새 항목")+'</div><div class="win-b" style="overflow:auto"><form id="ef">';
+  SCHEMA[col].forEach(function(s){
+    var v=o[s.k];var nm='f_'+s.k;
+    f+='<label class="fld" for="'+nm+'">'+esc(s.l);
+    if(s.t==="select"){f+='<select id="'+nm+'" name="'+s.k+'">';s.o.forEach(function(x){f+='<option'+(v===x?" selected":"")+'>'+esc(x)+'</option>'});f+='</select>'}
+    else if(s.t==="textarea")f+='<textarea id="'+nm+'" name="'+s.k+'">'+esc(v)+'</textarea>';
+    else if(s.t==="lines")f+='<textarea class="lines" id="'+nm+'" name="'+s.k+'">'+esc((v||[]).map(function(it){return it[0]+" | "+it[1]}).join("\n"))+'</textarea>';
+    else f+='<input id="'+nm+'" name="'+s.k+'" type="'+(s.t==="number"?"number":s.t==="date"?"date":s.t==="url"?"url":"text")+'" value="'+esc(v)+'">';
+    f+='</label>';
+  });
+  f+='<div class="form-act"><button class="btn ghost" type="button" data-act="close">취소</button><button class="btn red" type="submit">적용</button></div></form></div></div></div>';
+  document.body.insertAdjacentHTML("beforeend",f);
+  var first=$("#ef input, #ef select, #ef textarea");if(first)first.focus();
+  $("#ef").addEventListener("submit",function(e){
+    e.preventDefault();
+    var fd=new FormData(e.target);var n=id?clone(o):{id:uid()};
+    SCHEMA[col].forEach(function(s){
+      var v=fd.get(s.k)||"";
+      if(s.t==="lines")n[s.k]=String(v).split("\n").map(function(l){return l.trim()}).filter(Boolean).map(function(l){var i=l.indexOf("|");return i<0?["",l]:[l.slice(0,i).trim(),l.slice(i+1).trim()]});
+      else if(s.t==="number")n[s.k]=+v||0;
+      else n[s.k]=String(v).trim();
+    });
+    if(id)S[col][findIdx(col,id)]=n;else S[col].push(n);
+    closeForm();markDirty();toast(id?"수정했어요. 저장하기를 눌러야 공유돼요":"추가했어요. 저장하기를 눌러야 공유돼요");
+  });
+}
+function closeForm(){var m=$("#modal");if(m)m.remove()}
+
+function save(){
+  var prev=S.meta.updated;
+  S.meta.updated=new Date().toISOString();
+  lsSet({base:BASE.meta.updated,state:S,n:dirty,pending:S.meta.updated});
+  if(!art){S.meta.updated=prev;toast("여기서는 서버 저장을 쓸 수 없어 이 브라우저에만 보관했어요");return}
+  toast("저장하는 중…");
+  art.publish(buildDoc(S)).then(function(){toast("저장했어요")}).catch(function(err){
+    var c=err&&err.code;S.meta.updated=prev;
+    if(c==="conflict"){toast("다른 곳에서 먼저 저장해서 최신본을 다시 불러와요")}
+    else if(["not_writer","not_granted","consent_required","capability_disabled","capability_removed","not_declared"].indexOf(c)>=0){canWrite=false;lsSet({base:BASE.meta.updated,state:S,n:dirty});render();toast("보기 전용 화면이라 이 브라우저에만 보관했어요")}
+    else if(c==="rate_limited"){toast("너무 자주 저장했어요. 잠시 뒤 다시 눌러 주세요")}
+    else{toast("저장하지 못했어요. 잠시 뒤 다시 눌러 주세요")}
+  });
+}
+function buildDoc(state){
+  var css=document.getElementById("gs").textContent;
+  var js=document.getElementById("gjs").textContent;
+  var json=JSON.stringify(state).replace(/</g,"\\u003c");
+  return '<!doctype html><html><head><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><style>'+RESET+'</style></head><body>'+
+    '<title>12월 신혼여행 가이드</title>\n<meta name="claude:viewport-fit-sides" content="cover">\n'+FONT_LINK+'\n<style id="gs">'+css+'</style>\n<div id="app"></div>\n<script type="application/json" id="trip-data">'+json+'<\/script>\n<script id="gjs">'+js+'<\/script></body></html>';
+}
+var toastT;
+function toast(m){var t=$("#toast");if(!t){t=document.createElement("div");t.id="toast";t.className="toast";t.setAttribute("role","status");document.body.appendChild(t)}t.textContent=m;t.hidden=false;clearTimeout(toastT);toastT=setTimeout(function(){t.hidden=true},3200)}
+
+/* ---------- 이벤트 ---------- */
+document.addEventListener("click",function(e){
+  var b=e.target.closest("[data-act],[data-tab],[data-city],[data-kind]");if(!b)return;
+  if(b.hasAttribute("data-tab")){tab=b.getAttribute("data-tab");kindF="";dayEnter=true;render();return}
+  if(b.hasAttribute("data-city")){var c=b.getAttribute("data-city");city=(city===c)?"":c;render();return}
+  if(b.hasAttribute("data-kind")){kindF=b.getAttribute("data-kind");render();return}
+  var a=b.getAttribute("data-act");
+  if(a==="day"){var id=b.getAttribute("data-id");if(id&&id!==curDay){curDay=id;dayEnter=true;render()}}
+  else if(a==="ck"){tickStop(b)}
+  else if(a==="edit"){editMode=!editMode;pendingDel=null;render()}
+  else if(a==="open"){openForm(b.getAttribute("data-col"),b.getAttribute("data-id"))}
+  else if(a==="close"){closeForm()}
+  else if(a==="del"){var key=b.getAttribute("data-col")+":"+b.getAttribute("data-id");
+    if(pendingDel===key){var col=b.getAttribute("data-col");S[col].splice(findIdx(col,b.getAttribute("data-id")),1);pendingDel=null;markDirty();toast("삭제했어요")}
+    else{pendingDel=key;render();setTimeout(function(){if(pendingDel===key){pendingDel=null;render()}},3500)}}
+  else if(a==="tick"){var i=findIdx("quests",b.getAttribute("data-id"));S.quests[i].done=!S.quests[i].done;markDirty()}
+  else if(a==="save"){save()}
+  else if(a==="revert"){if(pendingDel==="revert"){S=clone(BASE);S.checks=S.checks||{};dirty=0;pendingDel=null;lsSet(null);render();toast("마지막 저장 상태로 되돌렸어요")}else{pendingDel="revert";render();setTimeout(function(){if(pendingDel==="revert"){pendingDel=null;render()}},3500)}}
+  else if(a==="draft-load"){S=draft.state;S.checks=S.checks||{};S.meta.updated=BASE.meta.updated;dirty=draft.n;showDraftBanner=false;render();toast("수정본을 불러왔어요. 저장하기를 눌러 마무리하세요")}
+  else if(a==="draft-drop"){lsSet(null);showDraftBanner=false;draft=null;render()}
+});
+document.addEventListener("keydown",function(e){if(e.key==="Escape")closeForm()});
+document.addEventListener("click",function(e){if(e.target.id==="modal")closeForm()});
+var qT;
+document.addEventListener("input",function(e){
+  if(e.target.id!=="q")return;
+  clearTimeout(qT);var v=e.target.value;
+  qT=setTimeout(function(){q=v.trim().toLowerCase();render();var el=$("#q");el.focus();el.setSelectionRange(v.length,v.length)},180);
+});
+
+/* ---------- 히어로 눈송이 ---------- */
+function rng(s){return function(){s=(s*16807)%2147483647;return (s-1)/2147483646}}
+var flakes=[],raf=0,reduce=window.matchMedia&&matchMedia("(prefers-reduced-motion: reduce)").matches;
+function drawSceneSoon(){requestAnimationFrame(buildScene)}
+function buildScene(){
+  var cv=$("#cv");if(!cv)return;
+  var r=cv.getBoundingClientRect(),dpr=Math.min(window.devicePixelRatio||1,2);
+  var w=Math.round(r.width),h=Math.round(r.height);if(!w||!h)return;
+  cv.width=w*dpr;cv.height=h*dpr;cv._w=w;cv._h=h;cv._dpr=dpr;
+  var R=rng(11);flakes=[];for(var i=0;i<Math.round(w/7);i++)flakes.push({x:R()*w,y:R()*h,r:.6+R()*2,v:.2+R()*.6,d:R()*6,a:.35+R()*.55});
+  cancelAnimationFrame(raf);frame(0);
+}
+function frame(t){
+  var cv=$("#cv");if(!cv||!cv._w)return;
+  var x=cv.getContext("2d"),w=cv._w,h=cv._h;
+  x.setTransform(cv._dpr,0,0,cv._dpr,0,0);x.clearRect(0,0,w,h);
+  flakes.forEach(function(f){
+    if(!reduce){f.y+=f.v;f.x+=Math.sin((t/1600)+f.d)*.3;if(f.y>h+4){f.y=-4;f.x=Math.random()*w}}
+    x.fillStyle="rgba(255,255,255,"+f.a+")";x.beginPath();x.arc(f.x,f.y,f.r,0,6.283);x.fill();
+  });
+  if(!reduce&&!document.hidden)raf=requestAnimationFrame(frame);
+}
+document.addEventListener("visibilitychange",function(){if(!document.hidden&&!reduce){cancelAnimationFrame(raf);raf=requestAnimationFrame(frame)}});
+var rzT;window.addEventListener("resize",function(){clearTimeout(rzT);rzT=setTimeout(buildScene,150)});
+
+render();
+if(window.claude&&window.claude.use){window.claude.use("artifact").then(function(a){art=a;if(!a)canWrite=false}).catch(function(){})}
+})();
+</script>

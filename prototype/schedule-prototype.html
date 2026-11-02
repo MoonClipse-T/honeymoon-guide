@@ -1,0 +1,305 @@
+<meta charset="utf-8">
+<title>일정 화면 시안</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Jua&family=Noto+Sans+KR:wght@400;500;700&display=swap">
+<style>
+/* Layout: 신혼여행 가이드의 '일정' 탭 자리 — 위에 앱 머리줄, 가운데 시안 한 개를 실제 크기로, 아래 고정 피커 */
+:root{
+  --sky:#bfe4fb; --snow:#fffefa; --wood:#f3e7d4; --ink:#3a2418; --ink-2:#7a5a48; --line:#5a3422;
+  --gold:#ffc93c; --gold-2:#ffe08a; --berry:#e0453f; --pine:#2f8f4e; --dusk:#2d6fb0;
+  --f-display:"Jua","Noto Sans KR",system-ui,sans-serif;
+  --f-body:"Noto Sans KR",system-ui,-apple-system,"Apple SD Gothic Neo","Malgun Gothic",sans-serif;
+  --ease-out:cubic-bezier(0.23,1,0.32,1);
+  color-scheme:light;
+}
+body{background:linear-gradient(180deg,var(--sky) 0,#e3f3ff 360px,#f5fbff 100%);color:var(--ink);font-family:var(--f-body);font-size:15px;line-height:1.6;min-height:100%}
+*{box-sizing:border-box}
+button{font:inherit;color:inherit}
+:focus-visible{outline:3px solid var(--gold);outline-offset:2px}
+.wrap{max-width:980px;margin:0 auto;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));padding-block:20px 120px}
+
+/* 앱 머리줄 (주변 맥락) */
+.appbar{display:flex;align-items:center;justify-content:space-between;gap:10px;flex-wrap:wrap;margin-bottom:18px}
+.appbar h1{margin:0;font-family:var(--f-display);font-weight:400;font-size:26px;color:#fff;text-shadow:2px 0 0 var(--line),-2px 0 0 var(--line),0 2px 0 var(--line),0 -2px 0 var(--line),0 4px 0 var(--line)}
+.dday{font-family:var(--f-display);font-size:16px;background:var(--gold);color:var(--line);border:3px solid var(--line);border-radius:10px;padding:1px 10px;box-shadow:0 3px 0 var(--line)}
+.tabs{display:flex;gap:6px;overflow-x:auto;padding:4px 2px 0}
+.tab{font-family:var(--f-display);font-size:15px;background:var(--wood);border:3px solid var(--line);border-bottom-width:0;border-radius:12px 12px 0 0;padding:6px 13px 5px;color:var(--line);white-space:nowrap;position:relative;top:3px}
+.tab[aria-selected="true"]{background:var(--snow);z-index:1}
+.win{position:relative;background:var(--snow);border:3px solid var(--line);border-radius:12px;box-shadow:inset 0 0 0 2px #fff,0 5px 0 rgba(58,36,24,.35)}
+.win::before{content:"";position:absolute;left:10px;right:10px;top:-9px;height:13px;background:radial-gradient(circle at 9px 10px,#fff 8px,transparent 8.5px) 0 0/18px 13px repeat-x;filter:drop-shadow(0 -1.5px 0 var(--line));pointer-events:none}
+.win-b{padding:18px}
+.btn{font-family:var(--f-display);font-size:15px;background:linear-gradient(var(--gold-2),var(--gold));border:2px solid var(--line);border-radius:9px;box-shadow:0 3px 0 var(--line);padding:4px 12px;cursor:pointer;color:var(--line);white-space:nowrap;transition:transform 120ms var(--ease-out)}
+.btn:active{transform:translateY(2px);box-shadow:0 1px 0 var(--line)}
+.btn[disabled]{opacity:.4;cursor:default}
+.alert{font-size:13.5px;background:#fff3cf;border:1.5px solid #d99a12;border-radius:8px;padding:7px 11px}
+.stay{font-size:13.5px;color:var(--ink-2)}
+.stay b{color:var(--ink)}
+
+/* ===== 1. 퀘스트 로그 ===== */
+.ql-days{display:flex;gap:6px;overflow-x:auto;padding:2px 2px 12px;scrollbar-width:thin}
+.ql-day{flex:none;display:flex;flex-direction:column;align-items:center;gap:1px;min-width:58px;padding:6px 8px;border:2px solid var(--line);border-radius:10px;background:#fff;cursor:pointer;font-variant-numeric:tabular-nums}
+.ql-day b{font-family:var(--f-display);font-weight:400;font-size:18px;line-height:1.1}
+.ql-day span{font-size:11px;color:var(--ink-2)}
+.ql-day i{width:22px;height:4px;border-radius:2px;background:var(--c)}
+.ql-day[aria-pressed="true"]{background:var(--gold);box-shadow:0 3px 0 var(--line)}
+.ql-day.done-all b::after{content:"✓";font-size:12px;color:var(--pine);margin-left:2px}
+.ql-head{display:flex;justify-content:space-between;align-items:flex-end;gap:12px;flex-wrap:wrap;margin-bottom:10px}
+.ql-head h2{margin:0;font-family:var(--f-display);font-weight:400;font-size:26px;line-height:1.2;color:var(--line);text-wrap:balance}
+.ql-head small{display:block;font-size:13px;color:var(--ink-2)}
+.ql-nav{display:flex;gap:6px}
+.ql-prog{display:flex;align-items:center;gap:10px;margin:10px 0 14px;font-size:13px;font-weight:700;color:var(--ink-2);font-variant-numeric:tabular-nums}
+.ql-bar{flex:1;height:12px;border:2px solid var(--line);border-radius:7px;background:var(--wood);overflow:hidden}
+.ql-bar i{display:block;height:100%;background:var(--pine);transform-origin:left center;transition:transform 220ms var(--ease-out)}
+.ql-list{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:7px}
+.ql-item{display:grid;grid-template-columns:34px 54px 1fr;gap:10px;align-items:center;background:#fff;border:2px solid #e3d2bd;border-radius:10px;padding:8px 10px;animation:qlIn 260ms var(--ease-out) both;animation-delay:calc(var(--i)*35ms)}
+.ql-item.next{border-color:var(--line);box-shadow:0 3px 0 var(--gold)}
+.ql-item.done{opacity:.55}
+.ql-item.done .ql-text{text-decoration:line-through}
+.ql-check{width:30px;height:30px;border:2.5px solid var(--line);border-radius:8px;background:#fff;cursor:pointer;display:grid;place-items:center;padding:0;transition:transform 140ms var(--ease-out)}
+.ql-check:active{transform:scale(.9)}
+.ql-check svg{width:17px;height:17px;transform:scale(0);transition:transform 180ms var(--ease-out)}
+.ql-check[aria-pressed="true"]{background:var(--pine)}
+.ql-check[aria-pressed="true"] svg{transform:scale(1)}
+.ql-time{font-variant-numeric:tabular-nums;font-weight:700;color:var(--dusk);font-size:13.5px}
+.ql-text{font-size:14.5px;min-width:0}
+.ql-next{font-family:var(--f-display);font-size:12px;background:var(--gold);border:1.5px solid var(--line);border-radius:6px;padding:0 6px;margin-right:6px;vertical-align:1px}
+@keyframes qlIn{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
+
+/* ===== 2. 동선 지도 ===== */
+.mp-top{display:flex;align-items:center;gap:10px;margin-bottom:12px}
+.mp-date{flex:1;min-width:0;text-align:center}
+.mp-date b{display:block;font-family:var(--f-display);font-weight:400;font-size:30px;line-height:1.1;color:var(--line);font-variant-numeric:tabular-nums}
+.mp-date span{font-size:14px;color:var(--ink-2)}
+.mp-city{display:inline-block;margin-top:4px;font-family:var(--f-display);font-size:14px;color:#fff;background:var(--c);border:2px solid var(--line);border-radius:999px;padding:0 10px}
+.mp-dots{display:flex;justify-content:center;gap:5px;margin:6px 0 14px}
+.mp-dots button{width:10px;height:10px;border-radius:50%;border:2px solid var(--line);background:#fff;padding:0;cursor:pointer}
+.mp-dots button[aria-current="true"]{background:var(--berry)}
+.mp-board{position:relative;border:3px solid var(--line);border-radius:14px;background:linear-gradient(180deg,#eaf5ff,#fbfdff 60%);overflow:hidden}
+.mp-board svg{position:absolute;inset:0;width:100%;height:100%}
+.mp-stop{position:absolute;transform:translate(-50%,-50%);display:flex;flex-direction:column;align-items:center;gap:3px;background:none;border:0;padding:0;cursor:pointer;width:30%;animation:mpIn 280ms var(--ease-out) both;animation-delay:calc(var(--i)*45ms)}
+.mp-pin{width:36px;height:36px;border-radius:50%;background:#fff;border:3px solid var(--line);display:grid;place-items:center;font-family:var(--f-display);font-size:16px;color:var(--line);box-shadow:0 3px 0 var(--line);transition:transform 160ms var(--ease-out)}
+.mp-stop:active .mp-pin{transform:scale(.94)}
+.mp-stop[aria-pressed="true"] .mp-pin{background:var(--gold)}
+.mp-lbl{font-size:12px;font-weight:700;line-height:1.3;text-align:center;background:rgba(255,254,250,.94);border:1.5px solid #e3d2bd;border-radius:7px;padding:1px 6px;max-width:100%;overflow-wrap:anywhere}
+.mp-lbl time{display:block;color:var(--dusk);font-variant-numeric:tabular-nums}
+.mp-detail{margin-top:14px;display:grid;grid-template-columns:auto 1fr;gap:12px;align-items:center;background:#fff;border:2px solid var(--line);border-radius:12px;padding:12px 14px}
+.mp-detail b{font-family:var(--f-display);font-weight:400;font-size:24px;color:var(--dusk);font-variant-numeric:tabular-nums}
+.mp-detail p{margin:0;font-size:15px}
+.mp-foot{display:flex;flex-direction:column;gap:8px;margin-top:12px}
+@keyframes mpIn{from{opacity:0;transform:translate(-50%,-38%)}to{opacity:1;transform:translate(-50%,-50%)}}
+
+/* ===== 3. 한눈 달력 ===== */
+.cal-note{margin:0 0 12px;font-size:13.5px;color:var(--ink-2)}
+.cal-scroll{overflow-x:auto;border:2px solid var(--line);border-radius:10px;background:#fff}
+.cal{border-collapse:separate;border-spacing:0;font-size:12.5px;line-height:1.45;min-width:1060px;width:100%}
+.cal th,.cal td{border-right:1px solid #eadcc8;border-bottom:1px solid #eadcc8;vertical-align:top;padding:6px 7px;text-align:left}
+.cal thead th{position:sticky;top:0;background:#fff;padding:0;border-bottom:2px solid var(--line)}
+.cal .rowh{position:sticky;left:0;z-index:1;background:var(--wood);font-family:var(--f-display);font-weight:400;font-size:14px;color:var(--line);width:58px;border-right:2px solid var(--line)}
+.cal thead .rowh{z-index:2}
+.cal-dh{width:100%;display:block;border:0;background:none;cursor:pointer;text-align:left;padding:7px 8px 6px;border-top:5px solid var(--c)}
+.cal-dh b{display:block;font-family:var(--f-display);font-weight:400;font-size:17px;line-height:1.1;font-variant-numeric:tabular-nums;color:var(--line)}
+.cal-dh span{font-size:11.5px;color:var(--ink-2);font-weight:500}
+.cal-dh em{font-style:normal;font-size:11px;font-weight:700;color:#8a5a00;background:#fff3cf;border-radius:4px;padding:0 4px;margin-left:3px}
+.cal col.on,.cal td.on{background:#fffbea}
+.cal-dh[aria-pressed="true"]{background:#fffbea}
+.cal ul{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:3px}
+.cal li time{font-weight:700;color:var(--dusk);font-variant-numeric:tabular-nums;margin-right:3px}
+.cal .stayc{color:var(--ink-2)}
+.cal-detail{margin-top:14px;background:#fff;border:2px solid var(--line);border-radius:12px;padding:12px 14px;display:flex;flex-direction:column;gap:8px}
+.cal-detail h3{margin:0;font-family:var(--f-display);font-weight:400;font-size:20px;color:var(--line)}
+.cal-detail ol{margin:0;padding-left:0;list-style:none;display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:4px 16px;font-size:14px}
+.cal-detail time{font-weight:700;color:var(--dusk);font-variant-numeric:tabular-nums;margin-right:6px}
+
+@media (max-width:600px){
+  .ql-item{grid-template-columns:30px 46px 1fr;gap:8px}
+  .mp-lbl{font-size:11px}
+  .mp-detail b{font-size:20px}
+}
+@media (prefers-reduced-motion:reduce){.ql-item,.mp-stop{animation:none}.ql-bar i,.ql-check svg{transition:none}}
+
+/* ===== 피커 (PICKER.md 원문) ===== */
+.proto-picker{position:fixed;bottom:24px;left:50%;transform:translateX(-50%);z-index:2147483647;display:flex;align-items:center;gap:2px;padding:4px;border-radius:999px;background:rgba(10,10,10,0.82);-webkit-backdrop-filter:blur(12px) saturate(1.4);backdrop-filter:blur(12px) saturate(1.4);box-shadow:0 0 0 1px rgba(255,255,255,0.08) inset,0 8px 24px rgba(0,0,0,0.24),0 2px 6px rgba(0,0,0,0.12);font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;font-size:13px;line-height:1;-webkit-font-smoothing:antialiased;user-select:none;-webkit-user-select:none}
+.proto-picker-highlight{position:absolute;top:4px;left:0;height:28px;border-radius:999px;background:rgba(255,255,255,0.12);will-change:transform}
+.proto-picker[data-ready] .proto-picker-highlight{transition:transform 250ms cubic-bezier(0.23,1,0.32,1),width 250ms cubic-bezier(0.23,1,0.32,1)}
+@media (prefers-reduced-motion:reduce){.proto-picker[data-ready] .proto-picker-highlight{transition:none}}
+.proto-picker-item{position:relative;display:flex;align-items:center;height:28px;padding:0 12px;border:0;border-radius:999px;background:transparent;color:rgba(255,255,255,0.55);font:inherit;cursor:pointer;transition:color 150ms ease-out}
+.proto-picker-item:hover{color:rgba(255,255,255,0.85)}
+.proto-picker-item:active{transform:scale(0.97)}
+.proto-picker-item:focus-visible{outline:2px solid rgba(255,255,255,0.4);outline-offset:2px}
+.proto-picker-item[data-active]{color:#fff}
+.proto-picker-divider{width:1px;height:16px;margin:0 4px;background:rgba(255,255,255,0.12)}
+.proto-picker-replay{padding:0 10px;font-size:14px}
+.proto-picker[data-position="top"]{bottom:auto;top:24px}
+</style>
+
+<div class="wrap">
+  <header class="appbar"><h1>두 사람의 크리스마스 원정</h1><span class="dday" id="dday">D-40</span></header>
+  <nav class="tabs" aria-label="섹션"><span class="tab" aria-selected="true">일정</span><span class="tab">예약 퀘스트</span><span class="tab">장소·맛집</span><span class="tab">투어·여행사</span></nav>
+  <section class="win"><div class="win-b" id="stage"></div></section>
+</div>
+
+<nav class="proto-picker" aria-label="Prototype variants">
+  <span class="proto-picker-highlight" aria-hidden="true"></span>
+  <button class="proto-picker-item" data-active aria-current="true">퀘스트 로그</button>
+  <button class="proto-picker-item">동선 지도</button>
+  <button class="proto-picker-item">한눈 달력</button>
+  <span class="proto-picker-divider" aria-hidden="true"></span>
+  <button class="proto-picker-item proto-picker-replay" aria-label="Replay animation (R)">↻</button>
+</nav>
+
+<script type="application/json" id="days">[{"id":"d11","date":"2026-12-11","city":"공통","title":"출국 전날 밤","stay":"기내 (카타르항공, 1회 경유)","alert":"","items":[["21:00","인천공항 도착 (출발 3시간 전)"],["00:20","12일 0시 20분 출발, 프라하 13:25 도착"],["메모","유로 동전·코루나 현금 소액 준비 (페리, 사물함, 현금 전용 펍)"]]},{"id":"d12","date":"2026-12-12","city":"프라하","title":"프라하 도착, 구시가지 마켓","stay":"유니타스 호텔 (12~15일 3박)","alert":"","items":[["13:25","공항 도착 → 59번 버스 + 지하철 A선 (90분권 40 CZK) 또는 Bolt €18~25"],["15:00","유니타스 호텔 체크인"],["16:00","하벨 시장 → 구시가지 광장 크리스마스 마켓"],["16:30","구시청사 탑에서 해 질 녘 + 트리 점등 쇼 (매시 30분)"],["18:30","로칼 들로우하 저녁 (탱크 필스너)"],["20:30","우 즐라테호 티그라(현금만) 또는 우 메드비드쿠 한 잔 → 카를교 야경"]]},{"id":"d13","date":"2026-12-13","city":"프라하","title":"프라하 성과 말라 스트라나","stay":"유니타스 호텔","alert":"드레스덴(14일 월요일)과 날짜를 바꾸면 드레스덴 미술관이 열린 일요일에 갈 수 있어요. 보고서 점검 탭 참고.","items":[["08:30","스트라호프 수도원 도서관"],["09:30","프라하 성 (기본 투어 450 CZK, 한국어 오디오)"],["12:00","제1광장 근위병 교대식"],["13:00","스트라호프 양조장 점심"],["14:30","네루도바 거리 → 존 레넌 벽 → 캄파 섬 마켓"],["16:00","카를교 가스등 점등 퍼포먼스 + 해 질 녘"],["16:30","(선택) 맥주 스파, 2인 60분 3,290 CZK 이하일 때만"],["19:00","필드(미쉐린 1스타) 기념일 디너 또는 우 칼렌두"]]},{"id":"d14","date":"2026-12-14","city":"드레스덴","title":"드레스덴 당일치기","stay":"유니타스 호텔","alert":"월요일이라 츠빙거 고전회화관이 쉬어요. 마켓만 볼 거면 그대로, 미술관까지 보려면 13일(일)과 교체하세요. 다음 날 새벽 5시 픽업이니 일찍 복귀.","items":[["08:30","프라하 중앙역 EC 열차 (약 2시간 20분, 편도 €8~19)"],["11:00","성모교회 → 군주의 행렬 벽화 → 브륄의 테라스"],["12:00","크로이츠 교회 전망대에서 마켓 내려다보기"],["13:00","조피엔켈러 점심"],["14:00","슈트리첼마르크트 (11/25~12/24, 10~21시) · 글뤼바인 머그는 보증금제"],["17:00","열차로 프라하 복귀 (지연·플랫폼 변경 잦음)"],["21:00","짐 싸고 호텔 프런트에 새벽 체크아웃 정산"]]},{"id":"d15","date":"2026-12-15","city":"할슈타트","title":"체스키크룸로프 거쳐 할슈타트","stay":"할슈타트 숙소 (Dr.-Friedrich-Morton-Weg 24, 1박)","alert":"투어 업체에 할슈타트 하차, 도착 예정 시각, 캐리어 2개 크기를 글로 확약받아야 해요.","items":[["05:00","호텔 픽업"],["08:00","체스키크룸로프 (성탑·성 박물관만 개방, 화~일 9:00~15:30)"],["10:00","고사우 호수 사진 정차"],["12:30","할슈타트 하차 (추정) → 숙소에 짐 맡기기"],["13:00","제비르트 차우너 점심"],["13:30","스카이워크 (푸니쿨라 왕복 €29, 마지막 하행 16:30)"],["16:00","엽서 뷰포인트(Gosaumühlstraße) · Müllerstiege 계단"],["17:30","예약한 저녁 → 20시 전에 마트·맥주 장보기 (가게 대부분 20시 마감)"]]},{"id":"d16","date":"2026-12-16","city":"빈","title":"할슈타트 → 빈 → 부다페스트","stay":"실버 크라운 호텔 (16~19일 3박)","alert":"07:00 배는 평일·학교 수업일에만 다녀요. 12/13 새 시간표를 확인하고, 없으면 08:10 배 또는 차량 이동으로 바꾸세요.","items":[["06:15","(선택) 새벽 블루아워 호수 반영샷"],["06:45","체크아웃 → 마르크트 선착장"],["07:00","페리 (현금만)"],["07:14","지역 열차 → 아트낭-푸흐하임 환승"],["09:01","레일젯 → 11:03 빈 중앙역"],["11:15","중앙역 지하 사물함 (유로 동전 필요) 또는 Radical Storage"],["11:45","벨베데레 상궁, 클림트 〈키스〉 (시간 지정권)"],["13:00","피글뮐러 또는 플라후타 점심"],["14:30","카를 성당 → 오페라 → 케른트너 거리 → 슈테판 대성당"],["16:00","그라벤 → 콜마르크트(데멜) → 시청 광장 마켓"],["17:40","열차 출발 → 20:17 켈레티역 (또는 18:42 → 21:19)"],["20:30","Bolt로 호텔 (역 앞 호객 택시 피하기)"]]},{"id":"d17","date":"2026-12-17","city":"부다페스트","title":"국회의사당과 다뉴브 야경","stay":"실버 크라운 호텔","alert":"","items":[["09:00","국회의사당 (사전 예약, 1인 14,000 HUF, 여권)"],["10:30","다뉴브 강변 신발 추모비 → 성 이슈트반 대성당 돔"],["12:30","헝가리쿰 비스트로 점심"],["14:00","도하니 시나고그 (토요일 휴관이라 오늘)"],["16:00","대성당 앞 마켓 → 뵈뢰슈머르티 마켓"],["18:00","레젠다 다뉴브 야경 크루즈"],["20:00","보르코냐(미쉐린 1스타) 기념일 디너"]]},{"id":"d18","date":"2026-12-18","city":"부다페스트","title":"부다 언덕과 온천","stay":"실버 크라운 호텔","alert":"","items":[["07:00","어부의 요새 일출 (일출 약 7:30, 9시 전 무료)"],["09:00","마차시 성당 → 부다 성 지구 산책"],["12:30","스탄드25 비스트로 점심"],["14:00","세체니 다리 → 세체니 온천 (금 14,800 HUF)"],["17:00","겔레르트 언덕 일몰·야경 (선택)"],["19:00","엘레스퇴·그래비티·Csapszék 수제 맥주"],["22:00","(선택) 루다시 야간 온천, 금·토 22~03시"]]},{"id":"d19","date":"2026-12-19","city":"부다페스트","title":"마지막 날, 귀국","stay":"기내","alert":"","items":[["09:00","중앙시장 (토 06~15시, 오후 늦게는 닫음)"],["11:00","언드라시 거리 → 오페라하우스 → 영웅광장"],["13:00","점심"],["16:00","공항으로 (Bolt 또는 100E 공항버스 2,500 HUF)"],["19:30","부다페스트 출발 → 12/20 14:10 인천 도착"]]}]</script>
+<script>
+(function(){
+"use strict";
+var DAYS=JSON.parse(document.getElementById("days").textContent).sort(function(a,b){return a.date<b.date?-1:1});
+var CCOL={"프라하":"#e0453f","드레스덴":"#8a63d2","체스키크룸로프":"#2e86de","할슈타트":"#15a39c","빈":"#d99a12","부다페스트":"#2f8f4e","공통":"#7a5a48"};
+var DOW=["일","월","화","수","목","금","토"];
+var esc=function(s){return String(s==null?"":s).replace(/[&<>"']/g,function(c){return {"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]})};
+function pd(s){var m=/^(\d{4})-(\d{2})-(\d{2})/.exec(s);return new Date(+m[1],+m[2]-1,+m[3])}
+function md(s){var d=pd(s);return (d.getMonth()+1)+"."+String(d.getDate()).padStart(2,"0")}
+function dow(s){return DOW[pd(s).getDay()]}
+var t0=new Date();t0=new Date(t0.getFullYear(),t0.getMonth(),t0.getDate());
+var dd=Math.round((pd("2026-12-12")-t0)/864e5);
+document.getElementById("dday").textContent=dd>0?"출발까지 D-"+dd:"여행 중";
+function todayIdx(){var iso=t0.getFullYear()+"-"+String(t0.getMonth()+1).padStart(2,"0")+"-"+String(t0.getDate()).padStart(2,"0");var i=DAYS.findIndex(function(d){return d.date===iso});return i<0?1:i}
+var dayI=todayIdx();
+
+/* 체크 상태: 이 브라우저에만 */
+var CK="proto-sched-checks",checks={};
+try{checks=JSON.parse(localStorage.getItem(CK)||"{}")||{}}catch(e){checks={}}
+function saveChecks(){try{localStorage.setItem(CK,JSON.stringify(checks))}catch(e){}}
+
+var ICON_CHECK='<svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="4" aria-hidden="true"><path d="M4 12l5 5L20 6"/></svg>';
+
+/* ---- 1. 퀘스트 로그: 하루씩 넘기며 정류장을 체크 ---- */
+function questLog(){
+  var h='<div class="ql-days" role="group" aria-label="날짜">';
+  DAYS.forEach(function(d,i){
+    var n=d.items.length,c=d.items.filter(function(_,j){return checks[d.id+":"+j]}).length;
+    h+='<button type="button" class="ql-day'+(n&&c===n?" done-all":"")+'" data-day="'+i+'" aria-pressed="'+(i===dayI)+'" style="--c:'+(CCOL[d.city]||"#999")+'"><b>'+md(d.date)+'</b><span>'+dow(d.date)+'요일</span><i></i></button>';
+  });
+  h+='</div><div id="ql-body">'+questBody()+'</div>';
+  return h;
+}
+function questBody(){
+  var d=DAYS[dayI],n=d.items.length,done=0,next=-1;
+  d.items.forEach(function(_,j){if(checks[d.id+":"+j])done++;else if(next<0)next=j});
+  var h='<div class="ql-head"><div><small>'+md(d.date)+' '+dow(d.date)+'요일, '+esc(d.city)+'</small><h2>'+esc(d.title)+'</h2></div><div class="ql-nav"><button type="button" class="btn" data-step="-1"'+(dayI===0?" disabled":"")+'>전날</button><button type="button" class="btn" data-step="1"'+(dayI===DAYS.length-1?" disabled":"")+'>다음 날</button></div></div>';
+  if(d.stay)h+='<div class="stay">오늘 숙소 <b>'+esc(d.stay)+'</b></div>';
+  if(d.alert)h+='<div class="alert" style="margin-top:8px">'+esc(d.alert)+'</div>';
+  h+='<div class="ql-prog"><span>'+done+' / '+n+' 완료</span><div class="ql-bar"><i style="transform:scaleX('+(n?done/n:0)+')"></i></div></div><ol class="ql-list">';
+  d.items.forEach(function(it,j){
+    var on=!!checks[d.id+":"+j];
+    h+='<li class="ql-item'+(on?" done":"")+(j===next?" next":"")+'" style="--i:'+j+'"><button type="button" class="ql-check" data-ck="'+j+'" aria-pressed="'+on+'" aria-label="'+esc(it[1])+' 완료">'+ICON_CHECK+'</button><span class="ql-time">'+esc(it[0])+'</span><span class="ql-text">'+(j===next?'<span class="ql-next">다음</span>':'')+esc(it[1])+'</span></li>';
+  });
+  return h+'</ol>';
+}
+
+/* ---- 2. 동선 지도: 하루의 정류장을 지그재그 눈길 위에 ---- */
+var stopI=0;
+function routeMap(){
+  var d=DAYS[dayI],c=CCOL[d.city]||"#999";
+  var h='<div class="mp-top"><button type="button" class="btn" data-step="-1" aria-label="전날"'+(dayI===0?" disabled":"")+'>◀</button><div class="mp-date"><b>'+md(d.date)+' '+dow(d.date)+'</b><span>'+esc(d.title)+'</span><br><span class="mp-city" style="--c:'+c+'">'+esc(d.city)+'</span></div><button type="button" class="btn" data-step="1" aria-label="다음 날"'+(dayI===DAYS.length-1?" disabled":"")+'>▶</button></div>';
+  h+='<div class="mp-dots" role="group" aria-label="날짜">';DAYS.forEach(function(x,i){h+='<button type="button" data-day="'+i+'" aria-label="'+md(x.date)+'" aria-current="'+(i===dayI)+'"></button>'});h+='</div>';
+  var n=d.items.length,cols=3,rows=Math.ceil(n/cols),RH=128,W=300,H=rows*100;
+  var pts=d.items.map(function(_,j){var r=Math.floor(j/cols),c2=j%cols;if(r%2)c2=cols-1-c2;return [50+c2*100,50+r*100]});
+  var path="";pts.forEach(function(p,j){if(!j){path="M"+p[0]+" "+p[1];return}var q=pts[j-1];if(q[1]!==p[1]){var bx=p[0]>150?p[0]+42:p[0]-42;path+=" C"+bx+" "+q[1]+" "+bx+" "+p[1]+" "+p[0]+" "+p[1]}else path+=" L"+p[0]+" "+p[1]});
+  h+='<div class="mp-board" style="height:'+(rows*RH)+'px"><svg viewBox="0 0 '+W+' '+H+'" preserveAspectRatio="none" aria-hidden="true"><path d="'+path+'" fill="none" stroke="#ffffff" stroke-width="16" stroke-linecap="round" vector-effect="non-scaling-stroke"/><path d="'+path+'" fill="none" stroke="#e0453f" stroke-width="4" stroke-dasharray="2 12" stroke-linecap="round" vector-effect="non-scaling-stroke"/></svg>';
+  d.items.forEach(function(it,j){var p=pts[j];h+='<button type="button" class="mp-stop" data-stop="'+j+'" aria-pressed="'+(j===stopI)+'" style="left:'+(p[0]/W*100)+'%;top:'+(p[1]/H*100)+'%;--i:'+j+'"><span class="mp-pin">'+(j+1)+'</span><span class="mp-lbl"><time>'+esc(it[0])+'</time>'+esc(short(it[1]))+'</span></button>'});
+  h+='</div>';
+  var s=d.items[stopI]||["",""];
+  h+='<div class="mp-detail" aria-live="polite"><b>'+esc(s[0])+'</b><p>'+esc(s[1])+'</p></div>';
+  h+='<div class="mp-foot">'+(d.stay?'<div class="stay">오늘 숙소 <b>'+esc(d.stay)+'</b></div>':'')+(d.alert?'<div class="alert">'+esc(d.alert)+'</div>':'')+'</div>';
+  return h;
+}
+function short(t){t=String(t).split(/ → | \(|, /)[0];return t.length>16?t.slice(0,15)+"…":t}
+
+/* ---- 3. 한눈 달력: 9일 전체를 아침·오후·저녁 칸으로 ---- */
+var calSel=-1;
+function bucket(t){var m=/^(\d{1,2}):/.exec(t);if(!m)return 3;var hr=+m[1];return hr<12?0:hr<17?1:2}
+function calendar(){
+  var rows=["아침","오후","저녁","메모"];
+  var h='<p class="cal-note">여행 전체를 한 화면에 펼쳤어요. 날짜를 누르면 그날 전체 일정이 아래에 열려요. 노란 표시는 손봐야 할 날이에요.</p><div class="cal-scroll"><table class="cal"><thead><tr><th class="rowh"></th>';
+  DAYS.forEach(function(d,i){h+='<th><button type="button" class="cal-dh" data-cal="'+i+'" aria-pressed="'+(i===calSel)+'" style="--c:'+(CCOL[d.city]||"#999")+'"><b>'+md(d.date)+' '+dow(d.date)+'</b><span>'+esc(d.city==="체스키크룸로프"?"체스키":d.city)+'</span>'+(d.alert?'<em>확인</em>':'')+'</button></th>'});
+  h+='</tr></thead><tbody>';
+  rows.forEach(function(r,ri){
+    var any=DAYS.some(function(d){return d.items.some(function(it){return bucket(it[0])===ri})});if(!any&&ri===3)return;
+    h+='<tr><th class="rowh" scope="row">'+r+'</th>';
+    DAYS.forEach(function(d,i){
+      var its=d.items.filter(function(it){return bucket(it[0])===ri});
+      h+='<td class="'+(i===calSel?"on":"")+'"><ul>';its.forEach(function(it){h+='<li>'+(/^\d/.test(it[0])?'<time>'+esc(it[0])+'</time>':'')+esc(short(it[1]))+'</li>'});h+='</ul></td>';
+    });
+    h+='</tr>';
+  });
+  h+='<tr><th class="rowh" scope="row">숙소</th>';DAYS.forEach(function(d,i){h+='<td class="stayc'+(i===calSel?" on":"")+'">'+esc(d.stay)+'</td>'});h+='</tr></tbody></table></div>';
+  if(calSel>=0){var d=DAYS[calSel];h+='<div class="cal-detail"><h3>'+md(d.date)+' '+dow(d.date)+'요일, '+esc(d.title)+'</h3>'+(d.alert?'<div class="alert">'+esc(d.alert)+'</div>':'')+'<ol>';d.items.forEach(function(it){h+='<li><time>'+esc(it[0])+'</time>'+esc(it[1])+'</li>'});h+='</ol></div>'}
+  return h;
+}
+
+var variants=[questLog,routeMap,calendar];
+
+/* ---- 화면 안 상호작용 (변형 안쪽만 다시 그림, 등장 애니메이션은 다시 안 돎) ---- */
+var stage=document.getElementById("stage");
+stage.addEventListener("click",function(e){
+  var b=e.target.closest("button");if(!b||b.disabled)return;
+  if(b.hasAttribute("data-day")){dayI=+b.getAttribute("data-day");stopI=0;remount()}
+  else if(b.hasAttribute("data-step")){dayI=Math.max(0,Math.min(DAYS.length-1,dayI+(+b.getAttribute("data-step"))));stopI=0;remount()}
+  else if(b.hasAttribute("data-ck")){
+    var d=DAYS[dayI],k=d.id+":"+b.getAttribute("data-ck");
+    if(checks[k])delete checks[k];else checks[k]=1;saveChecks();
+    b.setAttribute("aria-pressed",String(!!checks[k]));
+    var done=0,next=-1;d.items.forEach(function(_,x){if(checks[d.id+":"+x])done++;else if(next<0)next=x});
+    stage.querySelectorAll(".ql-item").forEach(function(li,x){
+      li.classList.toggle("done",!!checks[d.id+":"+x]);li.classList.toggle("next",x===next);
+      var t=li.querySelector(".ql-text"),tag=t.querySelector(".ql-next");
+      if(x===next&&!tag)t.insertAdjacentHTML("afterbegin",'<span class="ql-next">다음</span>');
+      if(x!==next&&tag)tag.remove();
+    });
+    stage.querySelector(".ql-prog span").textContent=done+" / "+d.items.length+" 완료";
+    stage.querySelector(".ql-bar i").style.transform="scaleX("+(done/d.items.length)+")";
+    var db=stage.querySelector('.ql-day[data-day="'+dayI+'"]');if(db)db.classList.toggle("done-all",done===d.items.length)}
+  else if(b.hasAttribute("data-stop")){stopI=+b.getAttribute("data-stop");stage.querySelectorAll(".mp-stop").forEach(function(s){s.setAttribute("aria-pressed",String(s===b))});var s=DAYS[dayI].items[stopI];stage.querySelector(".mp-detail").innerHTML="<b>"+esc(s[0])+"</b><p>"+esc(s[1])+"</p>"}
+  else if(b.hasAttribute("data-cal")){var i=+b.getAttribute("data-cal");calSel=calSel===i?-1:i;var sc=stage.querySelector(".cal-scroll").scrollLeft;stage.innerHTML=calendar();stage.querySelector(".cal-scroll").scrollLeft=sc;var nb2=stage.querySelector('[data-cal="'+i+'"]');if(nb2)nb2.focus()}
+});
+function remount(){stage.innerHTML=variants[current]();var a=stage.querySelector('[aria-pressed="true"][data-day],[aria-current="true"][data-day]');if(a&&a.scrollIntoView)a.scrollIntoView({block:"nearest",inline:"center"})}
+
+/* ---- 피커 배선 (PICKER.md 참조 구현) ---- */
+var picker=document.querySelector(".proto-picker");
+var highlight=picker.querySelector(".proto-picker-highlight");
+var items=[].slice.call(picker.querySelectorAll(".proto-picker-item:not(.proto-picker-replay)"));
+var replay=picker.querySelector(".proto-picker-replay");
+var current=0;
+function moveHighlight(){var el=items[current];highlight.style.width=el.offsetWidth+"px";highlight.style.transform="translateX("+el.offsetLeft+"px)"}
+var booted=false;
+function mount(i){
+  // 첫 화면은 바로 그리고, 이후 전환은 비운 뒤 다음 프레임에 그려 등장 애니메이션을 다시 돌린다
+  if(!booted){booted=true;stage.innerHTML=variants[i]();return}
+  stage.innerHTML="";var done=false;
+  var draw=function(){if(done)return;done=true;stage.innerHTML=variants[i]()};
+  requestAnimationFrame(draw);setTimeout(draw,60);
+}
+function setActive(i){
+  if(i<0||i>=variants.length)return;
+  current=i;
+  items.forEach(function(el,j){el.toggleAttribute("data-active",j===i);if(j===i)el.setAttribute("aria-current","true");else el.removeAttribute("aria-current")});
+  moveHighlight();
+  try{var url=new URL(location);url.searchParams.set("v",i+1);history.replaceState(null,"",url)}catch(e){}
+  mount(i);
+}
+items.forEach(function(el,i){el.addEventListener("click",function(){setActive(i)})});
+if(replay)replay.addEventListener("click",function(){mount(current)});
+window.addEventListener("resize",moveHighlight);
+document.addEventListener("keydown",function(e){
+  if(/^(INPUT|TEXTAREA|SELECT)$/.test(e.target.tagName)||e.target.isContentEditable)return;
+  if(e.metaKey||e.ctrlKey||e.altKey)return;
+  var num=parseInt(e.key,10);
+  if(num>=1&&num<=variants.length)setActive(num-1);
+  else if(e.key==="ArrowRight")setActive((current+1)%variants.length);
+  else if(e.key==="ArrowLeft")setActive((current-1+variants.length)%variants.length);
+  else if(e.key==="r"||e.key==="R")mount(current);
+});
+var v0=1;try{v0=parseInt(new URLSearchParams(location.search).get("v"),10)||1}catch(e){}
+setActive(v0-1);
+requestAnimationFrame(function(){requestAnimationFrame(function(){picker.setAttribute("data-ready","")})});
+})();
+</script>
